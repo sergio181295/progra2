@@ -23,7 +23,7 @@ public class ListaSimple {
     String codigo = "";
     Integer i = 0;
     Nodo nodo = cabeza;
-    while (i < 5) {
+    while (i < 6) {
       if(nodo != null){        
         codigo += "|" + nodo.valor;
         nodo = nodo.siguiente;
