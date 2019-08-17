@@ -1,0 +1,31 @@
+digraph g{
+n20[label ="20"];
+n13[label ="13"];
+n9[label ="9"];
+n6[label ="6"];
+n10[label ="10"];
+n18[label ="18"];
+n14[label ="14"];
+n17[label ="17"];
+n32[label ="32"];
+n26[label ="26"];
+n24[label ="24"];
+n29[label ="29"];
+n36[label ="36"];
+n34[label ="34"];
+n40[label ="40"];
+n20 -> n13;
+n20 -> n32;
+n13 -> n9;
+n13 -> n18;
+n9 -> n6;
+n9 -> n10;
+n18 -> n14;
+n14 -> n17;
+n32 -> n26;
+n32 -> n36;
+n26 -> n24;
+n26 -> n29;
+n36 -> n34;
+n36 -> n40;
+}
