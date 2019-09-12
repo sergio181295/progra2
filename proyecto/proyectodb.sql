@@ -8,20 +8,20 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema proyectodb
+-- Schema PROYECTODB
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `proyectodb` ;
+DROP SCHEMA IF EXISTS `PROYECTODB` ;
 
 -- -----------------------------------------------------
--- Schema proyectodb
+-- Schema PROYECTODB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `proyectodb` DEFAULT CHARACTER SET utf8 ;
-USE `proyectodb` ;
+CREATE SCHEMA IF NOT EXISTS `PROYECTODB` DEFAULT CHARACTER SET utf8 ;
+USE `PROYECTODB` ;
 
 -- -----------------------------------------------------
--- Table `proyectodb`.`USUARIOS`
+-- Table `PROYECTODB`.`USUARIOS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proyectodb`.`USUARIOS` (
+CREATE TABLE IF NOT EXISTS `PROYECTODB`.`USUARIOS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CORREO` VARCHAR(45) NOT NULL,
   `NOMBRE` VARCHAR(45) NOT NULL,
@@ -35,9 +35,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proyectodb`.`TELEFONOS`
+-- Table `PROYECTODB`.`TELEFONOS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proyectodb`.`TELEFONOS` (
+CREATE TABLE IF NOT EXISTS `PROYECTODB`.`TELEFONOS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `USUARIO_ID` INT NOT NULL,
   `TELEFONO` VARCHAR(10) NOT NULL,
@@ -45,16 +45,16 @@ CREATE TABLE IF NOT EXISTS `proyectodb`.`TELEFONOS` (
   INDEX `telefonos_usuarioFK_idx` (`USUARIO_ID` ASC) VISIBLE,
   CONSTRAINT `telefonos_usuarioFK`
     FOREIGN KEY (`USUARIO_ID`)
-    REFERENCES `proyectodb`.`USUARIOS` (`ID`)
+    REFERENCES `PROYECTODB`.`USUARIOS` (`ID`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proyectodb`.`PRODUCTOS`
+-- Table `PROYECTODB`.`PRODUCTOS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proyectodb`.`PRODUCTOS` (
+CREATE TABLE IF NOT EXISTS `PROYECTODB`.`PRODUCTOS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOMBRE` VARCHAR(100) NOT NULL,
   `COSTO_UNITARIO` FLOAT NOT NULL,
@@ -65,9 +65,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proyectodb`.`ANUNCIOS`
+-- Table `PROYECTODB`.`ANUNCIOS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proyectodb`.`ANUNCIOS` (
+CREATE TABLE IF NOT EXISTS `PROYECTODB`.`ANUNCIOS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `TEXTO` VARCHAR(500) NOT NULL,
   `IMAGEN` BLOB NULL,
@@ -76,9 +76,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proyectodb`.`PEDIDOS`
+-- Table `PROYECTODB`.`PEDIDOS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proyectodb`.`PEDIDOS` (
+CREATE TABLE IF NOT EXISTS `PROYECTODB`.`PEDIDOS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOMBRE` VARCHAR(45) NOT NULL,
   `FECHA_ENTREGA` DATE NOT NULL,
@@ -88,16 +88,16 @@ CREATE TABLE IF NOT EXISTS `proyectodb`.`PEDIDOS` (
   INDEX `pedidoUsuarioFK_idx` (`USUARIO_ID` ASC) VISIBLE,
   CONSTRAINT `pedidoUsuarioFK`
     FOREIGN KEY (`USUARIO_ID`)
-    REFERENCES `proyectodb`.`USUARIOS` (`ID`)
+    REFERENCES `PROYECTODB`.`USUARIOS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proyectodb`.`DET_PRODUCTO`
+-- Table `PROYECTODB`.`DET_PRODUCTO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proyectodb`.`DET_PRODUCTO` (
+CREATE TABLE IF NOT EXISTS `PROYECTODB`.`DET_PRODUCTO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `PEDIDO_ID` INT NOT NULL,
   `PRODUCTO_ID` INT NOT NULL,
@@ -108,12 +108,12 @@ CREATE TABLE IF NOT EXISTS `proyectodb`.`DET_PRODUCTO` (
   INDEX `detallePedidoProductoFK_idx` (`PRODUCTO_ID` ASC) VISIBLE,
   CONSTRAINT `detallePedidoPedidoFK`
     FOREIGN KEY (`PEDIDO_ID`)
-    REFERENCES `proyectodb`.`PEDIDOS` (`ID`)
+    REFERENCES `PROYECTODB`.`PEDIDOS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `detallePedidoProductoFK`
     FOREIGN KEY (`PRODUCTO_ID`)
-    REFERENCES `proyectodb`.`PRODUCTOS` (`ID`)
+    REFERENCES `PROYECTODB`.`PRODUCTOS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -122,3 +122,5 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+docker run --name mysql -p 3306:3306  -v "C:/Users/sguillen/Documents/Guillen/umg/progra 2/progra2/proyecto/servicios/mysqlData:/var/lib/mysql"  -e MYSQL_ROOT_PASSWORD=admin -d mysql:8.0.17
