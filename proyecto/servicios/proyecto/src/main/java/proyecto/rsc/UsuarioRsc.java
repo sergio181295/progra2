@@ -11,38 +11,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import proyecto.ctrl.AnuncioCtrl;
-import proyecto.ent.Anuncio;
+import proyecto.ctrl.UsuarioCtrl;
+import proyecto.ent.Usuario;
 
 @RestController
-@RequestMapping (path="/anuncios")
-public class AnuncioRsc {
+@RequestMapping (path="/usuarios")
+public class UsuarioRsc {
 
 	@Autowired
-	private AnuncioCtrl anuncioCtrl;
+	private UsuarioCtrl usuarioCtrl;
 	
 	@GetMapping
-	public List<Anuncio> obtenerTodos() {
-		List<Anuncio> listaList =  (List<Anuncio>) anuncioCtrl.findAll();
+	public List<Usuario> obtenerTodos() {
+		List<Usuario> listaList =  (List<Usuario>) usuarioCtrl.findAll();
 		return listaList;
 	}
 	
 	@PutMapping
-	public Anuncio guardar(@RequestBody Anuncio anuncio) {
-		anuncioCtrl.save(anuncio);
-		return anuncio;
+	public Usuario guardar(@RequestBody Usuario usuario) {
+		usuarioCtrl.save(usuario);
+		return usuario;
 	}
 	
 	@GetMapping(path = "/{id:[0-9]+}")
-	public Anuncio obtenerId(@PathVariable("id") Integer id) {
-		Anuncio anuncio = (Anuncio)anuncioCtrl.findById(id).get();
-		return anuncio;
+	public Usuario obtenerId(@PathVariable("id") Integer id) {
+		Usuario usuario = (Usuario)usuarioCtrl.findById(id).get();
+		return usuario;
 	}
 
 	@DeleteMapping(path = "/{id:[0-9]+}")
-	public Anuncio borrar(@PathVariable("id") Integer id) {
-		Anuncio anuncio = (Anuncio)anuncioCtrl.findById(id).get();
-		anuncioCtrl.deleteById(id);
-		return anuncio;
+	public Usuario borrar(@PathVariable("id") Integer id) {
+		Usuario usuario = (Usuario)usuarioCtrl.findById(id).get();
+		usuarioCtrl.deleteById(id);
+		return usuario;
 	}
 }
