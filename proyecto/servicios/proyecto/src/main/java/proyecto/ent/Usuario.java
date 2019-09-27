@@ -41,26 +41,44 @@ public class Usuario {
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@Column(name = "FLG_ACTIVO_INACTIVO")
-	private Integer activoInactivo;
+	@Column(name = "FLG_ACTIVO")
+	private Boolean activo;
+	
+	@Column(name = "FLG_ADMIN")
+	private Boolean esAdministrador;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "usuario", cascade = {
 	    CascadeType.ALL
 	}, orphanRemoval = true)
 	@OrderBy("id ASC")
-	private List<Telefono> detalleTelefonos;
+	private List<Telefono> telefonos;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "usuario", cascade = {
+	    CascadeType.ALL
+	}, orphanRemoval = true)
+	@OrderBy("id ASC")
+	private List<Pedido> pedidos;
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	public int getId() {
 		return id;
 	}
 
-	public List<Telefono> getDetalleTelefonos() {
-		return detalleTelefonos;
+	public List<Telefono> getTelefonos() {
+		return telefonos;
 	}
 
-	public void setDetalleTelefonos(List<Telefono> detalleTelefonos) {
-		this.detalleTelefonos = detalleTelefonos;
+	public void setTelefonos(List<Telefono> telefonos) {
+		this.telefonos = telefonos;
 	}
 
 	public void setId(int id) {
@@ -115,11 +133,19 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public Integer getActivoInactivo() {
-		return activoInactivo;
+	public Boolean getActivo() {
+		return activo;
 	}
 
-	public void setActivoInactivo(Integer activoInactivo) {
-		this.activoInactivo = activoInactivo;
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
+
+	public Boolean getEsAdministrador() {
+		return esAdministrador;
+	}
+
+	public void setEsAdministrador(Boolean esAdministrador) {
+		this.esAdministrador = esAdministrador;
 	}
 }

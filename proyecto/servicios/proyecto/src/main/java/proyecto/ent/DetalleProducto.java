@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -30,6 +31,9 @@ public class DetalleProducto {
 	@Column(name = "PRODUCTO_ID")
 	private Integer productoId;
 	
+	@Transient
+	private Producto producto;
+	
 	@Column(name = "CANTIDAD")
 	private Float cantidad;
 	
@@ -42,6 +46,14 @@ public class DetalleProducto {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 
 	public Integer getPedidoId() {

@@ -9,10 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -32,8 +35,13 @@ public class Pedido {
 	@Column(name = "TOTAL")
 	private Float total;
 	
-	@Column(name = "USUARIO_ID")
+	@Column(name = "USUARIO_ID", insertable=false, updatable=false)
 	private Integer usuarioId;
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "USUARIO_ID")
+	private Usuario usuario;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "pedido", cascade = {
@@ -48,6 +56,14 @@ public class Pedido {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public List<DetalleProducto> getDetalleProductos() {

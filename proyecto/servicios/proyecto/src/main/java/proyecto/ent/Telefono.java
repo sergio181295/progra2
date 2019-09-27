@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="ANUNCIOS")
+@Table(name="TELEFONOS")
 public class Telefono {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
