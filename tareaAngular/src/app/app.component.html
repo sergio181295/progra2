@@ -1,0 +1,17 @@
+<div align="center">
+  <h1>Tarea Progra 2</h1>
+</div>
+<div align="center">
+  <table border=1>
+    <tr align="center">
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Precio Unitario</th>
+    </tr>
+    <tr align="center" *ngFor="let producto of listaProductos">
+      <td>{{producto.id}}</td>
+      <td>{{producto.nombre}}</td>
+      <td>{{producto.costoUnitario}}</td>
+    </tr>
+  </table>
+</div>
