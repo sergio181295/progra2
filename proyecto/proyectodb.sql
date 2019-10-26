@@ -123,5 +123,5 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-docker run --name mysql -p 3306:3306  -v "C:/Users/sguillen/Documents/Guillen/umg/progra 2/progra2/proyecto/servicios/mysqlData:/var/lib/mysql"  -e MYSQL_ROOT_PASSWORD=admin -d mysql:8.0.17
 docker run --name mysql -p 3306:3306  -v "C:/Users/sguillen/Documents/Guillen/umg/progra 2/progra2/proyecto/servicios/mysqlData:/var/lib/mysql" -e MYSQL_ROOT_PASSWORD=admin -d mysql:8.0.17
+docker run --name mysql -p 3306:3306  -v "/home/guillen/Documentos/Progra 2/proyecto/servicios/mysqlData:/var/lib/mysql" -e MYSQL_ROOT_PASSWORD=admin -d mysql:8.0.17
