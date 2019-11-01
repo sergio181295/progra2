@@ -1,0 +1,21 @@
+<nb-layout>
+  <nb-layout-column ></nb-layout-column>
+  <nb-layout-column >
+    <nb-card>
+      <nb-card-body>
+        <form [formGroup]="formulario">
+          <label for="usuario"><b>Usuario:</b></label>
+          <input nbInput type="text" name="usuario" formControlName="usuario">
+          <label for="password"><b>Contraseña:</b></label>
+          <input nbInput type="password" name="password" formControlName="password">
+        </form>
+        <br>
+        <div align="center">
+          <button nbButton status="success" (click)="ingresar()" [disabled]="formulario.invalid">Ingresar</button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+  <nb-layout-column ></nb-layout-column>
+</nb-layout>
+
