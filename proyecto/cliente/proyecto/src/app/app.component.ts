@@ -21,7 +21,7 @@ export class AppComponent {
     {
       title: 'Inicio',
       icon: 'home-outline',
-      link: [],
+      link: ['inicio'],
     },
     {
       title: 'Anuncios',

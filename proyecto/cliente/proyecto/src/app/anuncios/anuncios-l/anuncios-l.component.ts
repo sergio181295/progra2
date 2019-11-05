@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AnunciosService} from '../anuncios.service';
+import {CrudService} from '../../crud.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-anuncios-l',
@@ -12,8 +13,12 @@ export class AnunciosLComponent implements OnInit {
   public formulario: FormGroup;
   public listaAnuncios = [];
 
-  constructor(private formBuilder: FormBuilder, private anunciosService: AnunciosService) {
-    this.anunciosService.setRecuros('anuncios');
+  constructor(
+    private formBuilder: FormBuilder,
+    private crudService: CrudService,
+    private router: Router
+  ) {
+    crudService.setRecuros("anuncios")
   }
 
   ngOnInit() {
@@ -22,14 +27,26 @@ export class AnunciosLComponent implements OnInit {
       texto: [Validators.required, Validators.maxLength(300)],
       imagen: null
     });
-    this.anunciosService.setRecuros('anuncios');
     this.obtenerAnuncios();
   }
 
   obtenerAnuncios() {
-    this.anunciosService.obtenerTodos().subscribe((data: any[]) => {
-      console.log(data);
+    this.crudService.obtenerTodos().subscribe((data: any[]) => {
       this.listaAnuncios = data;
     })
+  }
+
+  nuevoAnuncio(){
+    this.router.navigate(['anuncios/nuevo']);
+  }
+
+  editarAnuncio(id: number){
+    this.router.navigate(['anuncios/'+id]);
+  }
+
+  borrarAnuncio(id: number){
+    this.crudService.eliminar(id).subscribe(res => {
+      this.obtenerAnuncios();
+    });
   }
 }

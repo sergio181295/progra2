@@ -1,13 +1,34 @@
 <nb-layout>
-  <!--  <nb-layout-column ></nb-layout-column>-->
   <nb-layout-column >
     <nb-card>
       <nb-card-body>
-
-
+        <button nbButton status="success" (click)="nuevoAnuncio()">Nuevo</button>
+        <table class="table" align="center" table-sm>
+          <thead class="thead-dark" align="center">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Texto</th>
+            <th scope="col">Imagen</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody align="center">
+          <tr *ngFor="let anuncio of listaAnuncios">
+            <th scope="row">{{anuncio.id}}</th>
+            <td>{{anuncio.texto}}</td>
+            <td><img src="{{anuncio.imagen}}" style="height: 100px; width: 100px"/></td>
+            <td>
+              <button nbButton status="danger" (click)="borrarAnuncio(anuncio.id)">
+                <nb-icon icon="trash-2-outline"></nb-icon></button>
+              &nbsp;
+              <button nbButton status="info" (click)="editarAnuncio(anuncio.id)">
+                <nb-icon icon="edit-2-outline"></nb-icon></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </nb-card-body>
     </nb-card>
       </nb-layout-column>
-<!--    <nb-layout-column ></nb-layout-column>-->
 </nb-layout>
 

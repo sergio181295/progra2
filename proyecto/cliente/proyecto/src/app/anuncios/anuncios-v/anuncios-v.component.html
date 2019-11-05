@@ -1,0 +1,25 @@
+<nb-card>
+  <nb-card-header class="text-center">
+    <h1>Anuncios</h1>
+  </nb-card-header>
+  <nb-card-body >
+    <form [formGroup]="formulario" (ngSubmit)="guardarAnuncio()">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="texto"><b>Texto:</b></label>
+            <textarea id="texto" formControlName="texto" nbInput fullWidth status="info"></textarea>
+          </div>
+          <button nbButton status="success" type="submit">Guardar</button>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="imagen"><b>Imagen:</b></label>
+            <input type="file" id="imagen" capture="user" accept="image/*" nbInput fullWidth status="info" (change)="cargarImagen($event)">
+            <img [src]="imagen" style="height: 300px; width: 300px">
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
