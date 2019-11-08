@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import proyecto.ctrl.ProductoCtrl;
 import proyecto.ent.Producto;
 
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping (path="/productos")
 public class ProductoRsc {

@@ -31,7 +31,7 @@ export class AppComponent {
     {
       title: 'Vendedores',
       icon: 'people-outline',
-      link: [],
+      link: ['usuarios'],
     },
     {
       title: 'Productos',

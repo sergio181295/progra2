@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   NbButtonModule,
-  NbCardModule,
+  NbCardModule, NbCheckboxModule,
   NbIconModule,
   NbInputModule,
   NbLayoutModule,
@@ -23,6 +23,7 @@ import { AnunciosLComponent } from './anuncios/anuncios-l/anuncios-l.component';
 import {CrudService} from './crud.service';
 import { AnunciosVComponent } from './anuncios/anuncios-v/anuncios-v.component';
 import { UsuariosLComponent } from './usuarios/usuarios-l/usuarios-l.component';
+import { UsuariosVComponent } from './usuarios/usuarios-v/usuarios-v.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UsuariosLComponent } from './usuarios/usuarios-l/usuarios-l.component';
     InicioComponent,
     AnunciosLComponent,
     AnunciosVComponent,
-    UsuariosLComponent
+    UsuariosLComponent,
+    UsuariosVComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { UsuariosLComponent } from './usuarios/usuarios-l/usuarios-l.component';
     NbInputModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NbIconModule
+    NbIconModule,
+    NbCheckboxModule
   ],
   providers: [
     CrudService

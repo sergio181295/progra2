@@ -1,0 +1,77 @@
+<nb-card>
+  <nb-card-header class="text-center">
+    <h1>Vendedor</h1>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="formulario" (ngSubmit)="guardarUsuario()">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-6">
+                <label for="nombre"><b>Nombre:</b></label>
+              </div>
+              <div class="col-6">
+                <label for="apellido"><b>Apellido:</b></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <input type="text" nbInput id="nombre" formControlName="nombre" status="info">
+              </div>
+              <div class="col-6">
+                <input type="text" nbInput id="apellido" formControlName="apellido" status="info">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-6">
+                <label for="fechaNacimiento"><b>Fecha Nacimiento:</b></label>
+              </div>
+              <div class="col-6">
+                <label for="password"><b>Contraseña:</b></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <input type="date" nbInput id="fechaNacimiento" formControlName="fechaNacimiento" status="info">
+              </div>
+              <div class="col-6">
+                <input type="text" nbInput id="password" formControlName="password" status="info">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-12">
+                <label for="correo"><b>Correo:</b></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <input type="text" nbInput id="correo" formControlName="correo" fullWidth status="info">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-12">
+                <label for="direccionEntrega"><b>Dirección de Entrega:</b></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <input type="text" nbInput id="direccionEntrega" formControlName="direccionEntrega" fullWidth status="info">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6"></div>
+      </div>
+      <div class="row">
+
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

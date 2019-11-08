@@ -5,8 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-anuncios-v',
-  templateUrl: './anuncios-v.component.html',
-  styleUrls: ['./anuncios-v.component.css']
+  templateUrl: './anuncios-v.component.html'
 })
 export class AnunciosVComponent implements OnInit {
 
