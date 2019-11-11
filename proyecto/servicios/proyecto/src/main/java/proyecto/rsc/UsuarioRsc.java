@@ -52,7 +52,7 @@ public class UsuarioRsc {
 		}
 		
 		if(!error.isEmpty()) {
-			throw new Exception(error);
+			throw new Error(error);
 		}
 		
 		if(usuario.getActivo() == null) {
