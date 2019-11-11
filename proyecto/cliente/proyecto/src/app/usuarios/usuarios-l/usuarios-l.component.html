@@ -23,7 +23,7 @@
             <td>{{usuario.nombre}}</td>
             <td>{{usuario.apellido}}</td>
             <td>{{usuario.correo}}</td>
-            <td><nb-checkbox status="warning" [checked]="usuario.activo"></nb-checkbox></td>
+            <td><nb-checkbox status="warning" [checked]="usuario.activo" disabled></nb-checkbox></td>
             <td>
               <button nbButton status="danger" (click)="eliminarUsuario(usuario.id)">
                 <nb-icon icon="trash-2-outline"></nb-icon></button>

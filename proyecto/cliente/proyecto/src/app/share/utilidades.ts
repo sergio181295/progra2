@@ -9,7 +9,7 @@ export class Errores {
       mensajeError = `Error: ${error.error.message}`;
     } else {
       // Server-side errors
-      mensajeError = `Error Servicio: ${error.status}\nMensaje: ${error.message}`;
+      mensajeError = `Error Servicio: ${error.message}`;
     }
     window.alert(mensajeError);
     return throwError(mensajeError);

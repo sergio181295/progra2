@@ -10,6 +10,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class UsuariosVComponent implements OnInit {
 
   public formulario: FormGroup;
+  public telefonos = [];
   public id = 0;
 
   constructor(
@@ -30,6 +31,34 @@ export class UsuariosVComponent implements OnInit {
     this.id = 0;
   }
 
+  guardarUsuario() {
+    
+    //eliminar telefonos en blanco
+    let telefonosUsuario = [];
+    for (let i = 0; i < this.telefonos.length; i++) {
+      if(this.telefonos[i].telefono !== ''){
+        telefonosUsuario.push(this.telefonos[i]);
+      }
+      
+    }
+    this.formulario.patchValue({telefonos: telefonosUsuario});
+    
+    this.crudService.guardar(this.formulario.value).subscribe(usuario => {
+      this.router.navigate(['usuarios']);
+    })
+  }
+
+  obtenerUsuario(id: number) {
+    this.crudService.obtenerUno(id).subscribe(usuario => {
+      this.formulario.patchValue(usuario);
+      this.telefonos = this.formulario.value.telefonos;
+    })
+  }
+
+  agregarTelefono() {
+    this.telefonos.push({telefono: '0'});
+  }
+
   aramarFormulario(){
     this.formulario = this.formBuilder.group({
       id: null,
@@ -44,17 +73,5 @@ export class UsuariosVComponent implements OnInit {
       telefonos: [[]],
       pedidos: [[]]
     });
-  }
-
-  guardarUsuario() {
-    this.crudService.guardar(this.formulario.value).subscribe(usuario => {
-      this.router.navigate(['usuarios']);
-    })
-  }
-
-  obtenerUsuario(id: number) {
-    this.crudService.obtenerUno(id).subscribe(usuario => {
-      this.formulario.patchValue(usuario);
-    })
   }
 }

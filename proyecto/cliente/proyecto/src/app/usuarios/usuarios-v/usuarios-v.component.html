@@ -62,15 +62,36 @@
             </div>
             <div class="row">
               <div class="col-12">
-                <input type="text" nbInput id="direccionEntrega" formControlName="direccionEntrega" fullWidth status="info">
+                <input type="text" nbInput id="direccionEntrega" formControlName="direccionEntrega" fullWidth
+                  status="info">
               </div>
             </div>
           </div>
         </div>
-        <div class="col-6"></div>
-      </div>
-      <div class="row">
-
+        <div class="col-6">
+          <div class="row">
+            <div class="col-8">
+              <div class="row">
+                <div class="col">
+                  <button nbButton status="primary" (click)="agregarTelefono()" type="button">+</button>
+                </div>
+              </div>
+              <!-- <div class="row"> -->
+                <nb-card size="small">
+                  <nb-list>
+                    <nb-list-item *ngFor="let telefono of telefonos; let i = index">
+                      <input type="text" nbInput fullWidth status="info" [(ngModel)]='telefonos[i].telefono'
+                        [ngModelOptions]="{standalone: true}" *ngIf="telefonos[i].telefono !== ''">
+                    </nb-list-item>
+                  </nb-list>
+                </nb-card>
+              <!-- </div> -->
+            </div>
+            <div class="col-4">
+                <button nbButton status="success" type="submit">Guardar</button>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   </nb-card-body>

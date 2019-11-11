@@ -11,12 +11,13 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbSidebarModule,
-  NbThemeModule
+  NbThemeModule,
+  NbListModule
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { InicioComponent } from './inicio/inicio.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AnunciosLComponent } from './anuncios/anuncios-l/anuncios-l.component';
@@ -52,7 +53,10 @@ import { UsuariosVComponent } from './usuarios/usuarios-v/usuarios-v.component';
     ReactiveFormsModule,
     HttpClientModule,
     NbIconModule,
-    NbCheckboxModule
+    NbCheckboxModule,
+    NbThemeModule.forRoot({ name: 'corporate' }),
+    NbListModule,
+    FormsModule
   ],
   providers: [
     CrudService
