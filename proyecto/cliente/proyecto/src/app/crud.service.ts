@@ -20,21 +20,18 @@ export class CrudService {
   }
 
   obtenerTodos(): Observable<any> {
-    return this.http.get(this.url).pipe(retry(1), catchError(Errores.manejoErrorHttp));
+    return this.http.get(this.url);
   }
 
   obtenerUno(id): Observable<any> {
-    return this.http.get(this.url + id)
-      .pipe(retry(1), catchError(Errores.manejoErrorHttp));
+    return this.http.get(this.url + id);
   }
 
   guardar(data): Observable<any> {
-    return this.http.put(this.url, JSON.stringify(data), Configuracion.HTTP_OPTIONS)
-      .pipe(retry(1), catchError(Errores.manejoErrorHttp));
+    return this.http.put(this.url, JSON.stringify(data), Configuracion.HTTP_OPTIONS);
   }
 
   eliminar(id): Observable<any> {
-    return this.http.delete(this.url + id, Configuracion.HTTP_OPTIONS)
-      .pipe(retry(1), catchError(Errores.manejoErrorHttp));
+    return this.http.delete(this.url + id, Configuracion.HTTP_OPTIONS);
   }
 }

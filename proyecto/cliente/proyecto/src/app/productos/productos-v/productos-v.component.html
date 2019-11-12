@@ -1,0 +1,46 @@
+<nb-card>
+  <nb-card-header class="text-center">
+    <h1>Producto</h1>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="formulario" (ngSubmit)="guardarProducto()">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-6">
+                <label for="nombre"><b>Nombre:</b></label>
+              </div>
+              <div class="col-6">
+                <label for="costoUnitario"><b>Costo Unitario</b></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <input type="text" nbInput id="nombre" formControlName="nombre" status="info">
+              </div>
+              <div class="col-6">
+                <input type="number" nbInput id="costoUnitario" formControlName="costoUnitario" status="info">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="descripcion"><b>Descripción:</b></label>
+                <textarea id="descripcion" formControlName="descripcion" nbInput fullWidth status="info"></textarea>
+              </div>
+            </div>
+          </div>
+          <button nbButton status="success" type="submit">Guardar</button>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="imagen"><b>Imagen:</b></label>
+            <input type="file" id="imagen" capture="user" accept="image/*" nbInput fullWidth status="info"
+                   (change)="cargarImagen($event)">
+            <img [src]="imagen" style="height: 100%; max-height: 300px; width:100%; max-width:300px;">
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

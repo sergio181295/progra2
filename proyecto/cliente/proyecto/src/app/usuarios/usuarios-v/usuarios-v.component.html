@@ -35,7 +35,10 @@
             </div>
             <div class="row">
               <div class="col-6">
-                <input type="date" nbInput id="fechaNacimiento" formControlName="fechaNacimiento" status="info">
+<!--                <input type="date" nbInput id="fechaNacimiento" formControlName="fechaNacimiento" status="info">-->
+                <input nbInput fullWidth formControlName="fechaNacimiento" status="success" class="form-control"
+                       placeholder="Cumpleanos" [nbDatepicker]="birthday">
+                <nb-datepicker #birthday format="dd-MM-yyyy"></nb-datepicker>
               </div>
               <div class="col-6">
                 <input type="text" nbInput id="password" formControlName="password" status="info">
@@ -81,7 +84,7 @@
                   <nb-list>
                     <nb-list-item *ngFor="let telefono of telefonos; let i = index">
                       <input type="text" nbInput fullWidth status="info" [(ngModel)]='telefonos[i].telefono'
-                        [ngModelOptions]="{standalone: true}" *ngIf="telefonos[i].telefono !== ''">
+                        [ngModelOptions]="{standalone: true}" >
                     </nb-list-item>
                   </nb-list>
                 </nb-card>
@@ -94,5 +97,13 @@
         </div>
       </div>
     </form>
+    <nb-card>
+      <nb-card-header>
+        <h3>Pedidos</h3>
+      </nb-card-header>
+      <nb-card-body>
+
+      </nb-card-body>
+    </nb-card>
   </nb-card-body>
 </nb-card>

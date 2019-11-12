@@ -21,10 +21,10 @@ export class UsuariosVComponent implements OnInit {
   ) {
     crudService.setRecuros('usuarios');
     this.id = +this.activatedRoute.snapshot.paramMap.get('id');
+    this.aramarFormulario();
   }
 
   ngOnInit() {
-    this.aramarFormulario();
     if(this.id !== 0){
       this.obtenerUsuario(this.id);
     }
@@ -32,17 +32,17 @@ export class UsuariosVComponent implements OnInit {
   }
 
   guardarUsuario() {
-    
+
     //eliminar telefonos en blanco
     let telefonosUsuario = [];
     for (let i = 0; i < this.telefonos.length; i++) {
       if(this.telefonos[i].telefono !== ''){
         telefonosUsuario.push(this.telefonos[i]);
       }
-      
+
     }
     this.formulario.patchValue({telefonos: telefonosUsuario});
-    
+    this.formulario.value.fechaNacimiento = this.formulario.value.fechaNacimiento.setHours(0,0,0,0);
     this.crudService.guardar(this.formulario.value).subscribe(usuario => {
       this.router.navigate(['usuarios']);
     })
@@ -50,13 +50,15 @@ export class UsuariosVComponent implements OnInit {
 
   obtenerUsuario(id: number) {
     this.crudService.obtenerUno(id).subscribe(usuario => {
+      usuario.fechaNacimiento = new Date(usuario.fechaNacimiento);
+      usuario.fechaNacimiento.setDate(usuario.fechaNacimiento.getDate() + 1);
       this.formulario.patchValue(usuario);
       this.telefonos = this.formulario.value.telefonos;
     })
   }
 
   agregarTelefono() {
-    this.telefonos.push({telefono: '0'});
+    this.telefonos.push({telefono: ''});
   }
 
   aramarFormulario(){
@@ -65,7 +67,7 @@ export class UsuariosVComponent implements OnInit {
       correo: [null, Validators.required],
       nombre: [null, Validators.required],
       apellido: [null, Validators.required],
-      fechaNacimiento: [null, Validators.required],
+      fechaNacimiento: [new Date(), Validators.required],
       direccionEntrega: [null, Validators.required],
       password: [null, Validators.required],
       activo: null,
@@ -74,4 +76,6 @@ export class UsuariosVComponent implements OnInit {
       pedidos: [[]]
     });
   }
+
+
 }

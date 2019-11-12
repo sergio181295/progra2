@@ -12,7 +12,7 @@ import {
   NbMenuModule,
   NbSidebarModule,
   NbThemeModule,
-  NbListModule
+  NbListModule, NbDatepicker, NbDatepickerModule
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
@@ -25,6 +25,9 @@ import {CrudService} from './crud.service';
 import { AnunciosVComponent } from './anuncios/anuncios-v/anuncios-v.component';
 import { UsuariosLComponent } from './usuarios/usuarios-l/usuarios-l.component';
 import { UsuariosVComponent } from './usuarios/usuarios-v/usuarios-v.component';
+import {NbDateFnsDateModule} from '@nebular/date-fns';
+import { ProductosLComponent } from './productos/productos-l/productos-l.component';
+import { ProductosVComponent } from './productos/productos-v/productos-v.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +37,14 @@ import { UsuariosVComponent } from './usuarios/usuarios-v/usuarios-v.component';
     AnunciosLComponent,
     AnunciosVComponent,
     UsuariosLComponent,
-    UsuariosVComponent
+    UsuariosVComponent,
+    ProductosLComponent,
+    ProductosVComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({name: 'corporate'}),
     NbLayoutModule,
     NbEvaIconsModule,
     NbSidebarModule.forRoot(),
@@ -56,7 +60,10 @@ import { UsuariosVComponent } from './usuarios/usuarios-v/usuarios-v.component';
     NbCheckboxModule,
     NbThemeModule.forRoot({ name: 'corporate' }),
     NbListModule,
-    FormsModule
+    FormsModule,
+    NbDatepickerModule,
+    NbDatepickerModule.forRoot(),
+    NbDateFnsDateModule
   ],
   providers: [
     CrudService

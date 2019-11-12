@@ -6,6 +6,8 @@ import {AnunciosVComponent} from './anuncios/anuncios-v/anuncios-v.component';
 import {InicioComponent} from './inicio/inicio.component';
 import {UsuariosLComponent} from './usuarios/usuarios-l/usuarios-l.component';
 import {UsuariosVComponent} from './usuarios/usuarios-v/usuarios-v.component';
+import {ProductosLComponent} from './productos/productos-l/productos-l.component';
+import {ProductosVComponent} from './productos/productos-v/productos-v.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,9 @@ const routes: Routes = [
   {path: 'usuarios', component: UsuariosLComponent},
   {path: 'usuarios/nuevo', component: UsuariosVComponent},
   {path: 'usuarios/:id', component: UsuariosVComponent},
+  {path: 'productos', component: ProductosLComponent},
+  {path: 'productos/nuevo', component: ProductosVComponent},
+  {path: 'productos/:id', component: ProductosVComponent},
 ];
 
 @NgModule({

@@ -16,11 +16,11 @@ export class UsuariosLComponent implements OnInit {
     private router: Router
   ) {
     this.crudService.setRecuros('usuarios');
+    this.cargarusuarios();
 
   }
 
   ngOnInit() {
-    this.cargarusuarios();
   }
 
   cargarusuarios() {

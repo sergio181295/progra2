@@ -36,7 +36,7 @@ export class AppComponent {
     {
       title: 'Productos',
       icon: 'cube-outline',
-      link: [],
+      link: ['productos'],
     },
     {
       title: 'Carrito',
