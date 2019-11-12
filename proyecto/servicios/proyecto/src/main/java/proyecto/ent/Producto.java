@@ -1,6 +1,5 @@
 package proyecto.ent;
 
-import java.sql.Blob;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +25,7 @@ public class Producto {
 	private String descripcion;
 	
 	@Column(name = "IMAGEN")
-	private Blob imagen;
+	private String imagen;
 	
 	public int getId() {
 		return id;
@@ -60,11 +59,11 @@ public class Producto {
 		this.descripcion = descripcion;
 	}
 
-	public Blob getImagen() {
+	public String getImagen() {
 		return imagen;
 	}
 
-	public void setImagen(Blob imagen) {
+	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
 }
