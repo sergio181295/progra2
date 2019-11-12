@@ -12,8 +12,8 @@ public class Utilidades {
 	        if ((Integer) valor <= 0) {
 	          error += "El campo '" + campo + "' debe ser mayor a 0. ";
 	        }
-	    }  else if (valor instanceof Float) {
-	        if ((Float) valor <= 0) {
+	    }  else if (valor instanceof Double) {
+	        if ((Double) valor <= 0) {
 	        	error += "El campo '" + campo + "' debe ser mayor a 0. ";
 	        }
 

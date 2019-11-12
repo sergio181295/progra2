@@ -33,7 +33,7 @@ public class Pedido {
 	private Date fechaEntrega;
 	
 	@Column(name = "TOTAL")
-	private Float total;
+	private Double total;
 	
 	@Column(name = "USUARIO_ID", insertable=false, updatable=false)
 	private Integer usuarioId;
@@ -90,11 +90,11 @@ public class Pedido {
 		this.fechaEntrega = fechaEntrega;
 	}
 
-	public Float getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void setTotal(Float total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 

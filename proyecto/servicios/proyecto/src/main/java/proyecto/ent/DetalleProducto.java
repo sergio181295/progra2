@@ -35,10 +35,10 @@ public class DetalleProducto {
 	private Producto producto;
 	
 	@Column(name = "CANTIDAD")
-	private Float cantidad;
+	private Double cantidad;
 	
 	@Column(name = "TOTAL")
-	private Float total;
+	private Double total;
 
 	public int getId() {
 		return id;
@@ -72,19 +72,19 @@ public class DetalleProducto {
 		this.productoId = productoId;
 	}
 
-	public Float getCantidad() {
+	public Double getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(Float cantidad) {
+	public void setCantidad(Double cantidad) {
 		this.cantidad = cantidad;
 	}
 
-	public Float getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void setTotal(Float total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 

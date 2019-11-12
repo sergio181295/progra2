@@ -19,7 +19,7 @@ public class Producto {
 	private String nombre;
 	
 	@Column(name = "COSTO_UNITARIO")
-	private Float costoUnitario;
+	private Double costoUnitario;
 	
 	@Column(name = "DESCRIPCION")
 	private String descripcion;
@@ -43,11 +43,11 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
-	public Float getCostoUnitario() {
+	public Double getCostoUnitario() {
 		return costoUnitario;
 	}
 
-	public void setCostoUnitario(Float costoUnitario) {
+	public void setCostoUnitario(Double costoUnitario) {
 		this.costoUnitario = costoUnitario;
 	}
 

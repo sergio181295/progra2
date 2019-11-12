@@ -21,13 +21,15 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { InicioComponent } from './inicio/inicio.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AnunciosLComponent } from './anuncios/anuncios-l/anuncios-l.component';
-import {CrudService} from './crud.service';
+import {CrudService} from './share/crud.service';
 import { AnunciosVComponent } from './anuncios/anuncios-v/anuncios-v.component';
 import { UsuariosLComponent } from './usuarios/usuarios-l/usuarios-l.component';
 import { UsuariosVComponent } from './usuarios/usuarios-v/usuarios-v.component';
 import {NbDateFnsDateModule} from '@nebular/date-fns';
 import { ProductosLComponent } from './productos/productos-l/productos-l.component';
 import { ProductosVComponent } from './productos/productos-v/productos-v.component';
+import { PedidosLComponent } from './pedidos/pedidos-l/pedidos-l.component';
+import { PedidosVComponent } from './pedidos/pedidos-v/pedidos-v.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { ProductosVComponent } from './productos/productos-v/productos-v.compone
     UsuariosLComponent,
     UsuariosVComponent,
     ProductosLComponent,
-    ProductosVComponent
+    ProductosVComponent,
+    PedidosLComponent,
+    PedidosVComponent
   ],
   imports: [
     BrowserModule,

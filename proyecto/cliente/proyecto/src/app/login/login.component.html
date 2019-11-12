@@ -3,15 +3,24 @@
   <nb-layout-column >
     <nb-card>
       <nb-card-body>
-        <form [formGroup]="formulario">
-          <label for="usuario"><b>Usuario:</b></label>
-          <input nbInput type="text" id="usuario" formControlName="usuario">
-          <label for="password"><b>Contraseña:</b></label>
-          <input nbInput type="password" id="password" formControlName="password">
+        <form [formGroup]="formulario" (ngSubmit)="ingresar()">
+            <div class="form-group">
+              <div class="row">
+                <div class="col">
+                  <label for="usuario"><b>Usuario:</b></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <input nbInput type="text" id="usuario" formControlName="usuario" status="info" fullWidth>
+                </div>
+              </div>
+              <label for="password"><b>Contraseña:</b></label>
+              <input nbInput type="password" id="password" formControlName="password" status="info" fullWidth>
+            </div>
         </form>
-        <br>
         <div align="center">
-          <button nbButton status="success" (click)="ingresar()" [disabled]="formulario.invalid">Ingresar</button>
+          <button nbButton status="success" [disabled]="formulario.invalid">Ingresar</button>
         </div>
       </nb-card-body>
     </nb-card>

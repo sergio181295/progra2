@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Configuracion} from './share/constantes';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Configuracion} from './constantes';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
-import {Errores} from './share/utilidades';
 
 @Injectable({
   providedIn: 'root'

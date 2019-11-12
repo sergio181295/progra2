@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CrudService} from '../../crud.service';
+import {CrudService} from '../../share/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

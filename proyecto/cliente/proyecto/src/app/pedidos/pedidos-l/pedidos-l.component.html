@@ -1,0 +1,39 @@
+<nb-layout>
+    <nb-layout-header>
+      <h1 class="text-center w-100"><b>Lista de Pedidos</b></h1>
+    </nb-layout-header>
+    <nb-layout-column>
+      <nb-card>
+        <nb-card-body>
+          <button nbButton status="success" (click)="nuevoPedido()">Nuevo</button>
+          <table class="table" align="center" table-sm>
+            <thead class="thead-dark" align="center">
+            <tr>
+              <th >Código</th>
+              <th >Nombre</th>
+              <th >Fecha de Entrega</th>
+              <th >Total</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr *ngFor="let pedido of listaPedidos" class="text-center w-100">
+              <th scope="row">{{pedido.id}}</th>
+              <td>{{pedido.nombre}}</td>
+              <td>{{pedido.fechaEntrega}}</td>
+              <td>{{pedido.total | currency(Q)}</td>
+              <td>
+                <button nbButton status="danger" (click)="eliminarPedido(pedido.id)">
+                  <nb-icon icon="trash-2-outline"></nb-icon></button>
+                &nbsp;
+                <button nbButton status="info" (click)="editarPedido(pedido.id)">
+                  <nb-icon icon="edit-2-outline"></nb-icon></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </nb-card-body>
+      </nb-card>
+    </nb-layout-column>
+  </nb-layout>
+  

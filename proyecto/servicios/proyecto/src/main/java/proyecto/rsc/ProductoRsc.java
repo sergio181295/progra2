@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import proyecto.ctrl.PedidoCtrl;
 import proyecto.ctrl.ProductoCtrl;
 import proyecto.ent.Pedido;
 import proyecto.ent.Producto;
@@ -29,9 +25,6 @@ public class ProductoRsc {
 
 	@Autowired
 	private ProductoCtrl productoCtrl;
-	
-	@Autowired
-	private PedidoCtrl pedidoCtrl;
 	
 	@Autowired
     private EntityManager entityManager;

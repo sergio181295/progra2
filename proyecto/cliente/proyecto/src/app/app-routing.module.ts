@@ -8,6 +8,8 @@ import {UsuariosLComponent} from './usuarios/usuarios-l/usuarios-l.component';
 import {UsuariosVComponent} from './usuarios/usuarios-v/usuarios-v.component';
 import {ProductosLComponent} from './productos/productos-l/productos-l.component';
 import {ProductosVComponent} from './productos/productos-v/productos-v.component';
+import { PedidosLComponent } from './pedidos/pedidos-l/pedidos-l.component';
+import { PedidosVComponent } from './pedidos/pedidos-v/pedidos-v.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,9 @@ const routes: Routes = [
   {path: 'productos', component: ProductosLComponent},
   {path: 'productos/nuevo', component: ProductosVComponent},
   {path: 'productos/:id', component: ProductosVComponent},
+  {path: 'pedidos', component: PedidosLComponent},
+  {path: 'pedidos/nuevo', component: PedidosVComponent},
+  {path: 'pedidos/:id', component: PedidosVComponent},
 ];
 
 @NgModule({
