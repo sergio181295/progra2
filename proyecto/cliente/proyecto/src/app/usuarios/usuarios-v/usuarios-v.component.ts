@@ -73,7 +73,8 @@ export class UsuariosVComponent implements OnInit {
       activo: null,
       esAdministrador: null,
       telefonos: [[]],
-      pedidos: [[]]
+      pedidos: [[]],
+      usuario: null
     });
   }
 

@@ -13,15 +13,15 @@ export class PedidosLComponent implements OnInit {
   constructor(
     private crudService: CrudService,
     private router: Router
-  ) { 
-    crudService.setRecuros('pedidos/1');
-  }
+  ) {  }
 
   ngOnInit() {
+    this.obtenerPedidos();
   }
 
   async obtenerPedidos() {
     try {
+      this.crudService.setRecuros('pedidos/' + localStorage.getItem('usuarioId'));
       const pedidos = await this.crudService.obtenerTodos().toPromise();
       this.listaPedidos = pedidos;
     } catch (e) {
@@ -29,8 +29,17 @@ export class PedidosLComponent implements OnInit {
     }
   }
 
-  nuevoPedido() {
-    this.router.navigate(['pedidos/nuevo'])
+  async eliminarPedido(id: number) {
+    try {
+      this.crudService.setRecuros('pedidos');
+      await this.crudService.eliminar(id).toPromise();
+      this.obtenerPedidos();
+    }catch (e) {
+      console.log(e.error.message);
+    }
   }
 
+  editarPedido(id: number) {
+    this.router.navigate(['pedidos/' + id]);
+  }
 }

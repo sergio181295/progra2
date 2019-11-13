@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CrudService} from '../share/crud.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +11,21 @@ export class LoginComponent implements OnInit {
   public formulario: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
-  ) { }
+    private formBuilder: FormBuilder,
+    private crudService: CrudService,
+    private router: Router
+  ) {
+    if (+localStorage.getItem('acceso') !== 2) {
+      localStorage.setItem('acceso', '2');
+      window.location.reload();
+    }
+    this.crudService.setRecuros('usuarios/login');
+  }
 
   ngOnInit() {
     this.armarFormulario();
+
+
   }
 
   private armarFormulario() {
@@ -23,8 +35,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public ingresar() {
-    const usuario = this.formulario.value;
-    console.log(usuario);
+  async ingresar() {
+    try {
+      const usuario = await this.crudService.guardar(this.formulario.value).toPromise();
+      localStorage.setItem('acceso', usuario.esAdministrador? '0' : '1');
+      localStorage.setItem('reload', 's');
+      localStorage.setItem('usuarioId', usuario.id);
+      this.router.navigate(['inicio']);
+    } catch (e) {
+      console.log(e.error.message);
+    }
   }
 }

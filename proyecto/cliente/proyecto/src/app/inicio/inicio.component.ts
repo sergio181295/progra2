@@ -3,8 +3,7 @@ import {CrudService} from '../share/crud.service';
 
 @Component({
   selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  templateUrl: './inicio.component.html'
 })
 export class InicioComponent implements OnInit {
 
@@ -20,6 +19,10 @@ export class InicioComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(localStorage.getItem('reload') === 's'){
+      localStorage.setItem('reload', 'n');
+      window.location.reload();
+    }
   }
 
 }

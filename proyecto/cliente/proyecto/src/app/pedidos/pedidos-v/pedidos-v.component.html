@@ -1,1 +1,68 @@
-<p>pedidos-v works!</p>
+<nb-card>
+  <nb-card-header class="text-center">
+    <h1>Pedido</h1>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="formulario">
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <button nbButton status="primary" size="small" type="button" (click)="regresar()">
+              <nb-icon icon="arrow-back-outline"></nb-icon>
+            </button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-4">
+            <label for="nombre"><b>Nombre:</b></label>
+          </div>
+          <div class="col-4">
+            <label for="fechaEntrega"><b>Fecha de Entrega:</b></label>
+          </div>
+          <div class="col-4">
+            <label for="total"><b>Total</b></label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <input type="text" nbInput id="nombre" formControlName="nombre" status="info" fullWidth>
+          </div>
+          <div class="col-4">
+            <input nbInput fullWidth formControlName="fechaEntrega" status="info" class="form-control"
+                   placeholder="Entrega" [nbDatepicker]="fechaEntrega" id="fechaEntrega" fullWidth>
+            <nb-datepicker #fechaEntrega format="dd-MM-yyyy"></nb-datepicker>
+          </div>
+          <div class="col-4">
+            <input type="number" nbInput id="total" formControlName="total" status="info" fullWidth>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">Codigo</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Costo Unitario</th>
+                <th scope="col">Sub Total</th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let det of productos">
+                <td>{{det.producto.id}}</td>
+                <td>{{det.producto.nombre}}</td>
+                <td>{{det.producto.costoUnitario | currency:'Q'}}</td>
+                <td>{{det.total | currency:'Q'}}</td>
+                <td><img src="{{det.producto.imagen}}" style="height: 75px; width: 75px"/></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

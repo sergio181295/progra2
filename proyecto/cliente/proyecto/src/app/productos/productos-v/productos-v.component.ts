@@ -51,9 +51,9 @@ export class ProductosVComponent implements OnInit {
   }
 
   obtenerProducto(id: number){
-    this.crudService.obtenerUno(id).subscribe(anuncio => {
-      this.formulario.patchValue(anuncio);
-      this.imagen = anuncio.imagen
+    this.crudService.obtenerUno(id).subscribe(producto => {
+      this.formulario.patchValue(producto);
+      this.imagen = producto.imagen
     })
   }
 

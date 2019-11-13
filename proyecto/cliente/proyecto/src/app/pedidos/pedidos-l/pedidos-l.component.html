@@ -5,7 +5,6 @@
     <nb-layout-column>
       <nb-card>
         <nb-card-body>
-          <button nbButton status="success" (click)="nuevoPedido()">Nuevo</button>
           <table class="table" align="center" table-sm>
             <thead class="thead-dark" align="center">
             <tr>
@@ -20,14 +19,14 @@
             <tr *ngFor="let pedido of listaPedidos" class="text-center w-100">
               <th scope="row">{{pedido.id}}</th>
               <td>{{pedido.nombre}}</td>
-              <td>{{pedido.fechaEntrega}}</td>
-              <td>{{pedido.total | currency(Q)}</td>
+              <td>{{pedido.fechaEntrega | date:'dd/MM/yyyy'}}</td>
+              <td>{{pedido.total | currency:'Q'}}</td>
               <td>
                 <button nbButton status="danger" (click)="eliminarPedido(pedido.id)">
                   <nb-icon icon="trash-2-outline"></nb-icon></button>
                 &nbsp;
                 <button nbButton status="info" (click)="editarPedido(pedido.id)">
-                  <nb-icon icon="edit-2-outline"></nb-icon></button>
+                  <nb-icon icon="eye-outline"></nb-icon></button>
               </td>
             </tr>
             </tbody>
@@ -36,4 +35,3 @@
       </nb-card>
     </nb-layout-column>
   </nb-layout>
-  

@@ -21,7 +21,7 @@
           <tr *ngFor="let producto of listaProductos" class="text-center w-100">
             <th scope="row">{{producto.id}}</th>
             <td>{{producto.nombre}}</td>
-            <td>{{producto.costoUnitario}}</td>
+            <td>{{producto.costoUnitario | currency:'Q'}}</td>
             <td>{{producto.descripcion}}</td>
             <td><img src="{{producto.imagen}}" style="height: 100px; width: 100px"/></td>
             <td>

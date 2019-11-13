@@ -10,6 +10,7 @@ import {ProductosLComponent} from './productos/productos-l/productos-l.component
 import {ProductosVComponent} from './productos/productos-v/productos-v.component';
 import { PedidosLComponent } from './pedidos/pedidos-l/pedidos-l.component';
 import { PedidosVComponent } from './pedidos/pedidos-v/pedidos-v.component';
+import {CarritoComponent} from './carrito/carrito/carrito.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,8 @@ const routes: Routes = [
   {path: 'pedidos', component: PedidosLComponent},
   {path: 'pedidos/nuevo', component: PedidosVComponent},
   {path: 'pedidos/:id', component: PedidosVComponent},
+  {path: 'carrito', component: CarritoComponent},
+  {path: '**', component: InicioComponent},
 ];
 
 @NgModule({

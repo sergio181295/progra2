@@ -2,6 +2,8 @@ package proyecto.rsc;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import proyecto.ctrl.ProductoCtrl;
@@ -30,6 +31,9 @@ public class UsuarioRsc {
 	
 	@Autowired
 	private ProductoCtrl productoCtrl;
+	
+	@Autowired
+    private EntityManager entityManager;
 	
 	@GetMapping
 	public List<Usuario> obtenerTodos() {
@@ -61,7 +65,14 @@ public class UsuarioRsc {
 		if(usuario.getEsAdministrador() == null) {
 			usuario.setEsAdministrador(false);
 		}
+
 		usuarioCtrl.save(usuario);
+		
+		if(usuario.getUsuario() == null || usuario.getUsuario().isEmpty()) {
+			usuario.setUsuario(usuario.getId().toString());
+			usuarioCtrl.save(usuario);
+		}
+		
 		return usuario;
 	}
 	
@@ -91,18 +102,30 @@ public class UsuarioRsc {
 		return usuario;
 	}
 	
-	@GetMapping(path = "/login")
-	public Boolean login(@RequestParam(required = false) String password, @RequestParam(required = false) Integer usuarioId) throws Exception {
-		Usuario usuario = (Usuario)usuarioCtrl.findById(usuarioId).get();
-		
-		if(usuario == null) {
-			throw new Exception("El usuario no existe.");
-		}
-		
-		if(usuario.getPassword().equals(password)) {
-			return true;
-		}
+	@SuppressWarnings("unchecked")
+	@PutMapping(path = "/login")
+	public Usuario login(@RequestBody Login login) throws Exception {
 
-		return false;
+		String sql = "SELECT * FROM USUARIOS WHERE USUARIO = '"+login.usuario+ "'";
+		List<Usuario> usuarios = entityManager.createNativeQuery(sql,Usuario.class).getResultList();
+		if( usuarios == null || usuarios.isEmpty()) {
+			throw new Error("El usuario no existe.");
+		}
+		
+		Usuario usuario = usuarios.get(0);
+		if(!usuario.getActivo()) {
+			throw new Error("Usuario no activo.");
+		}
+		
+		if(!usuario.getPassword().equals(login.password)) {
+			throw new Error("Contraseña incorrecta.");
+		}
+		
+		return usuario;
+	}
+	
+	public static class Login {
+		public String usuario;
+		public String password;
 	}
 }

@@ -21,7 +21,7 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private int id;
+	private Integer id;
 	
 	@Column(name = "CORREO")
 	private String correo;
@@ -47,6 +47,9 @@ public class Usuario {
 	@Column(name = "FLG_ADMIN")
 	private Boolean esAdministrador;
 	
+	@Column(name = "USUARIO")
+	private String usuario;
+	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "usuario", cascade = {
 	    CascadeType.ALL
@@ -65,11 +68,19 @@ public class Usuario {
 		return pedidos;
 	}
 
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -81,7 +92,7 @@ public class Usuario {
 		this.telefonos = telefonos;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

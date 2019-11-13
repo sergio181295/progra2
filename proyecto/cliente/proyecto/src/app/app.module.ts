@@ -12,7 +12,7 @@ import {
   NbMenuModule,
   NbSidebarModule,
   NbThemeModule,
-  NbListModule, NbDatepicker, NbDatepickerModule
+  NbListModule, NbDatepicker, NbDatepickerModule, NbUserModule
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
@@ -30,6 +30,7 @@ import { ProductosLComponent } from './productos/productos-l/productos-l.compone
 import { ProductosVComponent } from './productos/productos-v/productos-v.component';
 import { PedidosLComponent } from './pedidos/pedidos-l/pedidos-l.component';
 import { PedidosVComponent } from './pedidos/pedidos-v/pedidos-v.component';
+import { CarritoComponent } from './carrito/carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PedidosVComponent } from './pedidos/pedidos-v/pedidos-v.component';
     ProductosLComponent,
     ProductosVComponent,
     PedidosLComponent,
-    PedidosVComponent
+    PedidosVComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ import { PedidosVComponent } from './pedidos/pedidos-v/pedidos-v.component';
     FormsModule,
     NbDatepickerModule,
     NbDatepickerModule.forRoot(),
-    NbDateFnsDateModule
+    NbDateFnsDateModule,
+    NbUserModule
   ],
   providers: [
     CrudService
