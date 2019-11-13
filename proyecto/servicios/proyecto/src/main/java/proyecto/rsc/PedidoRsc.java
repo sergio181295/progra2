@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import proyecto.ctrl.PedidoCtrl;
+import proyecto.ctrl.ProductoCtrl;
+import proyecto.ctrl.UsuarioCtrl;
 import proyecto.ent.DetalleProducto;
 import proyecto.ent.Pedido;
+import proyecto.ent.Usuario;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -28,13 +31,19 @@ public class PedidoRsc {
 	private PedidoCtrl pedidoCtrl;
 	
 	@Autowired
+	private ProductoCtrl productoCtrl;
+	
+	@Autowired
+	private UsuarioCtrl usuarioCtrl;
+	
+	@Autowired
     private EntityManager entityManager;
 	
 	@SuppressWarnings("unchecked")
 	@GetMapping(path = "/{usuarioId:[0-9]+}")
 	public List<Pedido> obtenerTodos(@PathVariable("usuarioId") Integer usuarioId) {
 		String sql = "SELECT ID FROM PEDIDOS WHERE USUARIO_ID = " + usuarioId;
-		List<Integer> ids = entityManager.createNativeQuery(sql,Pedido.class).getResultList();
+		List<Integer> ids = entityManager.createNativeQuery(sql).getResultList();
 		List<Pedido> lista = new ArrayList<>();
 		if( ids != null && ids.size() > 0) {
 			for (Integer aux : ids) {
@@ -45,8 +54,8 @@ public class PedidoRsc {
 		return lista;
 	}
 	
-	@PutMapping
-	public Pedido guardar(@RequestBody Pedido pedido) {
+	@PutMapping(path = "/{usuarioId:[0-9]+}")
+	public Pedido guardar(@RequestBody Pedido pedido, @PathVariable("usuarioId") Integer usuarioId) {
 		
 		String error = "";
 		error += Utilidades.validarCampo(pedido.getNombre(), "nombre");
@@ -62,9 +71,16 @@ public class PedidoRsc {
 		
 		Double total = 0.0;
 		for (DetalleProducto det : pedido.getDetalleProductos()) {
-			total = (double) Math.round(det.getCantidad() * det.getProducto().getCostoUnitario());
+			det.setTotal(det.getCantidad() * det.getProducto().getCostoUnitario());
+			total += (double) Math.round(det.getTotal());
+		}
+		if(total.equals(0.0)) {
+			throw new Error("El pedido debe tener al menos 1 producto.");
 		}
 		pedido.setTotal(total);
+		
+		Usuario usuario = (Usuario)usuarioCtrl.findById(usuarioId).get();
+		pedido.setUsuario(usuario);
 		
 		pedidoCtrl.save(pedido);
 		return pedido;
@@ -73,10 +89,13 @@ public class PedidoRsc {
 	@GetMapping(path = "/{usuarioId:[0-9]+}/{id:[0-9]+}")
 	public Pedido obtenerId(@PathVariable("usuarioId") Integer usuarioId, @PathVariable("id") Integer id) {
 		Pedido pedido = (Pedido)pedidoCtrl.findById(id).get();
+		for (DetalleProducto det : pedido.getDetalleProductos()) {
+			det.setProducto(productoCtrl.findById(det.getProductoId()).get());
+		}
 		return pedido;
 	}
 
-	@DeleteMapping(path = "/{id:[0-9]+}")
+	@DeleteMapping(path = "/{id:[0-9]+}") 
 	public Pedido borrar(@PathVariable("id") Integer id) {
 		Pedido pedido = (Pedido)pedidoCtrl.findById(id).get();
 		pedidoCtrl.deleteById(id);
