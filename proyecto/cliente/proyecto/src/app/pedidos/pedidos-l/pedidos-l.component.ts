@@ -23,6 +23,10 @@ export class PedidosLComponent implements OnInit {
     try {
       this.crudService.setRecuros('pedidos/' + localStorage.getItem('usuarioId'));
       const pedidos = await this.crudService.obtenerTodos().toPromise();
+      for (const det of pedidos) {
+        det.fechaEntrega = new Date(det.fechaEntrega);
+        det.fechaEntrega.setDate(det.fechaEntrega.getDate() + 1);
+      }
       this.listaPedidos = pedidos;
     } catch (e) {
       console.log(e.error.message);

@@ -17,10 +17,10 @@
             </div>
             <div class="row">
               <div class="col-6">
-                <input type="text" nbInput id="nombre" formControlName="nombre" status="info">
+                <input type="text" nbInput id="nombre" formControlName="nombre" status="info" fullWidth>
               </div>
               <div class="col-6">
-                <input type="text" nbInput id="apellido" formControlName="apellido" status="info">
+                <input type="text" nbInput id="apellido" formControlName="apellido" status="info" fullWidth>
               </div>
             </div>
           </div>
@@ -30,17 +30,33 @@
                 <label for="fechaNacimiento"><b>Fecha Nacimiento:</b></label>
               </div>
               <div class="col-6">
-                <label for="password"><b>Contraseña:</b></label>
+                <label for="activo"><b>Activo:</b></label>
               </div>
             </div>
             <div class="row">
               <div class="col-6">
                 <input nbInput fullWidth formControlName="fechaNacimiento" status="info" class="form-control"
-                       placeholder="Cumpleanos" [nbDatepicker]="fechaNacimiento" id="fechaNacimiento">
+                       placeholder="Nacimiento" [nbDatepicker]="fechaNacimiento" id="fechaNacimiento">
                 <nb-datepicker #fechaNacimiento format="dd-MM-yyyy"></nb-datepicker>
               </div>
               <div class="col-6">
-                <input type="text" nbInput id="password" formControlName="password" status="info">
+                <nb-checkbox status="warning" formControlName="activo" id="activo" ></nb-checkbox>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for="password"><b>Contraseña:</b></label>
+              </div>
+              <div class="col-6">
+                <label for="password2"><b>Confirmar Contraseña:</b></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <input type="password" nbInput id="password" formControlName="password" status="info" fullWidth>
+              </div>
+              <div class="col-6">
+                <input type="password" nbInput id="password2" status="info" fullWidth>
               </div>
             </div>
           </div>
@@ -68,16 +84,16 @@
                        status="info">
               </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-12">
                 <label for="activo"><b>Activo:</b></label>
               </div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
               <div class="col-12">
                 <nb-checkbox status="warning" formControlName="activo" id="activo" ></nb-checkbox>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="col-6">

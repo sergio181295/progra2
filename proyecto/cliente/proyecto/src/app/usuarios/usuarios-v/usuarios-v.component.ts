@@ -12,6 +12,7 @@ export class UsuariosVComponent implements OnInit {
   public formulario: FormGroup;
   public telefonos = [];
   public id = 0;
+  public confirmacion = '';
 
   constructor(
     private crudService: CrudService,
@@ -33,6 +34,10 @@ export class UsuariosVComponent implements OnInit {
 
   guardarUsuario() {
 
+    if(this.formulario.value.password !== this.confirmacion){
+      throw "Las contraseñas deben de ser iguales.";
+      
+    }
     //eliminar telefonos en blanco
     let telefonosUsuario = [];
     for (let i = 0; i < this.telefonos.length; i++) {
