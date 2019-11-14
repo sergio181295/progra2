@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../share/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NotificacionesService} from '../../share/notificaciones.service';
 
 @Component({
   selector: 'app-pedidos-v',
@@ -17,7 +18,8 @@ export class PedidosVComponent implements OnInit {
     private formBuilder: FormBuilder,
     private crudService: CrudService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private notificaciones: NotificacionesService
   ) {
     crudService.setRecuros('pedidos/' + localStorage.getItem('usuarioId'));
     this.id = +this.activatedRoute.snapshot.paramMap.get('id');
@@ -25,29 +27,31 @@ export class PedidosVComponent implements OnInit {
 
   ngOnInit() {
     this.armarFormulario();
-    if(this.id !== 0){
+    if (this.id !== 0) {
       this.obtenerPedido(this.id);
     }
     this.id = 0;
   }
 
-  armarFormulario(){
+  armarFormulario() {
     this.formulario = this.formBuilder.group({
       id: null,
       nombre: {value: '', disabled: true},
-      fechaEntrega: {value: null, disabled: true},
+      fechaEntrega: {value: new Date(), disabled: true},
       total: {value: 0.0, disabled: true},
       detalleProductos: [[]]
-    })
+    });
   }
 
-  obtenerPedido(id: number){
-    this.crudService.obtenerUno(id).subscribe(pedido => {
-      pedido.fechaEntrega = new Date(pedido.fechaEntrega);
-      pedido.fechaEntrega.setDate(pedido.fechaEntrega.getDate() + 1);
+  async obtenerPedido(id: number) {
+    try {
+      let pedido = await this.crudService.obtenerUno(id).toPromise();
       this.formulario.patchValue(pedido);
       this.productos = pedido.detalleProductos;
-    })
+      this.notificaciones.emitir('success', 'Datos cargados.');
+    } catch (e) {
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
+    }
   }
 
   regresar() {

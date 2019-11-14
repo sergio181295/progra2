@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from 'src/app/share/crud.service';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NotificacionesService} from '../../share/notificaciones.service';
 
 @Component({
   selector: 'app-pedidos-l',
@@ -12,7 +13,8 @@ export class PedidosLComponent implements OnInit {
 
   constructor(
     private crudService: CrudService,
-    private router: Router
+    private router: Router,
+    private notificaciones: NotificacionesService
   ) {  }
 
   ngOnInit() {
@@ -28,8 +30,9 @@ export class PedidosLComponent implements OnInit {
         det.fechaEntrega.setDate(det.fechaEntrega.getDate() + 1);
       }
       this.listaPedidos = pedidos;
+      this.notificaciones.emitir('success', 'Datos cargados.');
     } catch (e) {
-      console.log(e.error.message);
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
     }
   }
 
@@ -38,8 +41,9 @@ export class PedidosLComponent implements OnInit {
       this.crudService.setRecuros('pedidos');
       await this.crudService.eliminar(id).toPromise();
       this.obtenerPedidos();
+      this.notificaciones.emitir('success', 'Registro eliminado.');
     }catch (e) {
-      console.log(e.error.message);
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
     }
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../share/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NotificacionesService} from '../../share/notificaciones.service';
 
 @Component({
   selector: 'app-productos-v',
@@ -17,7 +18,8 @@ export class ProductosVComponent implements OnInit {
     private formBuilder: FormBuilder,
     private crudService: CrudService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private notificaciones: NotificacionesService
   ) {
     crudService.setRecuros('productos');
     this.id = +this.activatedRoute.snapshot.paramMap.get('id');
@@ -46,14 +48,15 @@ export class ProductosVComponent implements OnInit {
       await this.crudService.guardar(this.formulario.value).toPromise();
       this.router.navigate(['productos']);
     }catch (e) {
-      console.log(e.error.message);
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
     }
   }
 
   obtenerProducto(id: number){
     this.crudService.obtenerUno(id).subscribe(producto => {
       this.formulario.patchValue(producto);
-      this.imagen = producto.imagen
+      this.imagen = producto.imagen;
+      this.notificaciones.emitir('success', 'Datos cargados.');
     })
   }
 

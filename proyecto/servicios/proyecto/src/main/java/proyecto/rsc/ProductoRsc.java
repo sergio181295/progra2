@@ -38,13 +38,14 @@ public class ProductoRsc {
 	@PutMapping
 	public Producto guardar(@RequestBody Producto producto) {
 		String error = "";
-		error += Utilidades.validarCampo(producto.getNombre(), "nombre");
-		error += Utilidades.validarCampo(producto.getCostoUnitario(), "costo unitario");
-		error += Utilidades.validarCampo(producto.getDescripcion(), "descripcion");
+		error += Utilidades.validarCampo(producto.getNombre(), "Nombre");
+		error += Utilidades.validarCampo(producto.getCostoUnitario(), "Costo Unitario");
+		error += Utilidades.validarCampo(producto.getDescripcion(), "Descripcion");
 		
 		if(!error.isEmpty()) {
 			throw new Error(error);
 		}
+		
 		productoCtrl.save(producto);
 		return producto;
 	}

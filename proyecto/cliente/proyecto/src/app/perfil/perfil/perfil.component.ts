@@ -1,20 +1,19 @@
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../share/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NotificacionesService} from '../../share/notificaciones.service';
 
 @Component({
-  selector: 'app-usuarios-v',
-  templateUrl: './usuarios-v.component.html'
+  selector: 'app-perfil',
+  templateUrl: './perfil.component.html'
 })
-export class UsuariosVComponent implements OnInit {
+export class PerfilComponent implements OnInit {
 
+  public acceso = 2;
   public formulario: FormGroup;
   public telefonos = [];
-  public id = 0;
   public confirmacion = '';
-  public pedidos = [];
   public passOriginal = '';
 
   constructor(
@@ -24,16 +23,16 @@ export class UsuariosVComponent implements OnInit {
     private formBuilder: FormBuilder,
     private notificaciones: NotificacionesService
   ) {
+    this.acceso = +localStorage.getItem('acceso');
     crudService.setRecuros('usuarios');
-    this.id = +this.activatedRoute.snapshot.paramMap.get('id');
     this.aramarFormulario();
   }
 
   ngOnInit() {
-    if (this.id !== 0) {
-      this.obtenerUsuario(this.id);
-    }
-    this.id = 0;
+    this.obtenerUsuario(+localStorage.getItem('usuarioId'))
+      .then(res => {
+        this.notificaciones.emitir('success', 'Datos cargados.');
+      });
   }
 
   async guardarUsuario() {
@@ -72,28 +71,30 @@ export class UsuariosVComponent implements OnInit {
           telefonosUsuario.push(this.telefonos[i]);
         }
       }
-      this.formulario.patchValue({telefonos: telefonosUsuario});
 
       //fecha
       let fecha = new Date(this.formulario.value.fechaNacimiento);
       fecha.setDate(fecha.getDate() + 1);
       this.formulario.patchValue({fechaNacimiento: fecha});
 
+      this.formulario.patchValue({telefonos: telefonosUsuario});
       await this.crudService.guardar(this.formulario.value).toPromise();
-      this.router.navigate(['usuarios']);
+      this.obtenerUsuario(+localStorage.getItem('usuarioId'));
+      this.notificaciones.emitir('success', 'Datos guardados.');
     } catch (e) {
       this.notificaciones.emitir('danger', e.error ? e.error.message : e);
     }
   }
 
-  obtenerUsuario(id: number) {
-    this.crudService.obtenerUno(id).subscribe(usuario => {
+  async obtenerUsuario(id: number) {
+    try {
+      const usuario = await this.crudService.obtenerUno(id).toPromise();
       this.formulario.patchValue(usuario);
       this.telefonos = this.formulario.value.telefonos;
-      this.pedidos = this.formulario.value.pedidos;
       this.passOriginal = this.formulario.value.password;
-      this.notificaciones.emitir('success', 'Datos cargados.');
-    });
+    } catch (e) {
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
+    }
   }
 
   agregarTelefono() {
@@ -104,8 +105,8 @@ export class UsuariosVComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       id: null,
       correo: [null, Validators.required],
-      nombre: [null, Validators.required],
-      apellido: [null, Validators.required],
+      nombre: null,
+      apellido: null,
       fechaNacimiento: [new Date(), Validators.required],
       direccionEntrega: [null, Validators.required],
       password: [null, Validators.required],
@@ -116,4 +117,6 @@ export class UsuariosVComponent implements OnInit {
       usuario: null
     });
   }
+
+
 }

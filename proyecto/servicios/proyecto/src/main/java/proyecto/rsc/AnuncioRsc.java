@@ -31,6 +31,13 @@ public class AnuncioRsc {
 	
 	@PutMapping
 	public Anuncio guardar(@RequestBody Anuncio anuncio) {
+		String error = "";
+		error += Utilidades.validarCampo(anuncio.getTexto(), "Texto");
+
+		if (!error.isEmpty()) {
+			throw new Error(error);
+		}
+		
 		anuncioCtrl.save(anuncio);
 		return anuncio;
 	}

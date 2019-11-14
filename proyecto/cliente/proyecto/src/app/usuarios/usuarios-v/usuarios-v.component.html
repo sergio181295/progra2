@@ -1,136 +1,159 @@
-<nb-card>
-  <nb-card-header class="text-center">
-    <h1>Vendedor</h1>
-  </nb-card-header>
-  <nb-card-body>
-    <form [formGroup]="formulario" (ngSubmit)="guardarUsuario()">
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <div class="row">
-              <div class="col-6">
-                <label for="nombre"><b>Nombre:</b></label>
-              </div>
-              <div class="col-6">
-                <label for="apellido"><b>Apellido:</b></label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <input type="text" nbInput id="nombre" formControlName="nombre" status="info" fullWidth>
-              </div>
-              <div class="col-6">
-                <input type="text" nbInput id="apellido" formControlName="apellido" status="info" fullWidth>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-6">
-                <label for="fechaNacimiento"><b>Fecha Nacimiento:</b></label>
-              </div>
-              <div class="col-6">
-                <label for="activo"><b>Activo:</b></label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <input nbInput fullWidth formControlName="fechaNacimiento" status="info" class="form-control"
-                       placeholder="Nacimiento" [nbDatepicker]="fechaNacimiento" id="fechaNacimiento">
-                <nb-datepicker #fechaNacimiento format="dd-MM-yyyy"></nb-datepicker>
-              </div>
-              <div class="col-6">
-                <nb-checkbox status="warning" formControlName="activo" id="activo" ></nb-checkbox>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <label for="password"><b>Contraseña:</b></label>
-              </div>
-              <div class="col-6">
-                <label for="password2"><b>Confirmar Contraseña:</b></label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <input type="password" nbInput id="password" formControlName="password" status="info" fullWidth>
-              </div>
-              <div class="col-6">
-                <input type="password" nbInput id="password2" status="info" fullWidth>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-12">
-                <label for="correo"><b>Correo:</b></label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <input type="text" nbInput id="correo" formControlName="correo" fullWidth status="info">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-12">
-                <label for="direccionEntrega"><b>Dirección de Entrega:</b></label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <input type="text" nbInput id="direccionEntrega" formControlName="direccionEntrega" fullWidth
-                       status="info">
-              </div>
-            </div>
-            <!-- <div class="row">
-              <div class="col-12">
-                <label for="activo"><b>Activo:</b></label>
-              </div>
-            </div> -->
-            <!-- <div class="row">
-              <div class="col-12">
-                <nb-checkbox status="warning" formControlName="activo" id="activo" ></nb-checkbox>
-              </div>
-            </div> -->
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row">
-            <div class="col-8">
-              <div class="row">
-                <div class="col">
-                  <button nbButton status="primary" (click)="agregarTelefono()" type="button">
-                    <nb-icon icon="phone-missed-outline"></nb-icon>
-                  </button>
-                </div>
-              </div>
-              <!-- <div class="row"> -->
-              <nb-card size="small">
-                <nb-list>
-                  <nb-list-item *ngFor="let telefono of telefonos; let i = index">
-                    <input type="text" nbInput fullWidth status="info" [(ngModel)]='telefonos[i].telefono'
-                           [ngModelOptions]="{standalone: true}">
-                  </nb-list-item>
-                </nb-list>
-              </nb-card>
-              <!-- </div> -->
-            </div>
-            <div class="col-4">
-              <button nbButton status="success" type="submit">Guardar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
+<nb-layout>
+  <nb-layout-column>
     <nb-card>
-      <nb-card-header>
-        <h3>Pedidos</h3>
+      <nb-card-header class="text-center">
+        <h1>Vendedor</h1>
       </nb-card-header>
       <nb-card-body>
-
+        <form [formGroup]="formulario" (ngSubmit)="guardarUsuario()">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-6">
+                    <label for="nombre"><b>Nombre:</b></label>
+                  </div>
+                  <div class="col-6">
+                    <label for="apellido"><b>Apellido:</b></label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <input type="text" nbInput id="nombre" formControlName="nombre" status="info" fullWidth>
+                  </div>
+                  <div class="col-6">
+                    <input type="text" nbInput id="apellido" formControlName="apellido" status="info" fullWidth>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-6">
+                    <label for="fechaNacimiento"><b>Fecha Nacimiento:</b></label>
+                  </div>
+                  <div class="col-6">
+                    <label for="activo"><b>Activo:</b></label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <input nbInput fullWidth formControlName="fechaNacimiento" status="info" class="form-control"
+                           placeholder="Nacimiento" id="fechaNacimiento" type="date">
+                  </div>
+                  <div class="col-6">
+                    <nb-checkbox status="warning" formControlName="activo" id="activo"></nb-checkbox>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <label for="password"><b>Contraseña:</b></label>
+                  </div>
+                  <div class="col-6">
+                    <label for="password2"><b>Confirmar Contraseña:</b></label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <input type="password" nbInput id="password" formControlName="password" status="info" fullWidth>
+                  </div>
+                  <div class="col-6">
+                    <input type="password" nbInput id="password2" status="info" fullWidth [(ngModel)]="confirmacion"
+                           [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-12">
+                    <label for="correo"><b>Correo:</b></label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <input type="text" nbInput id="correo" formControlName="correo" fullWidth status="info">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-12">
+                    <label for="direccionEntrega"><b>Dirección de Entrega:</b></label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <input type="text" nbInput id="direccionEntrega" formControlName="direccionEntrega" fullWidth
+                           status="info">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-8">
+                  <div class="row">
+                    <div class="col">
+                      <button nbButton status="primary" (click)="agregarTelefono()" type="button">
+                        <nb-icon icon="phone-missed-outline"></nb-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- <div class="row"> -->
+                  <nb-card size="small">
+                    <nb-list>
+                      <nb-list-item *ngFor="let telefono of telefonos; let i = index">
+                        <input type="text" nbInput fullWidth status="info" [(ngModel)]='telefonos[i].telefono'
+                               [ngModelOptions]="{standalone: true}">
+                      </nb-list-item>
+                    </nb-list>
+                  </nb-card>
+                  <!-- </div> -->
+                </div>
+                <div class="col-4">
+                  <button nbButton status="success" type="submit">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <nb-card>
+          <nb-card-header>
+            <h3>Pedidos</h3>
+          </nb-card-header>
+          <nb-card-body>
+            <nb-accordion multi>
+              <nb-accordion-item *ngFor="let pedido of pedidos">
+                <nb-accordion-item-header>
+                  <p><b>Pedido #:</b> {{pedido.id}} -- <b>Nombre:</b> {{pedido.nombre}} -- <b>Fecha de Entrega:</b>
+                    {{pedido.fechaEntrega | date:'dd/MM/yyyy'}} -- <b>Total:</b> {{pedido.total | currency:'Q'}}</p>
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                  <table class="table" align="center" table-sm>
+                    <thead class="thead-dark" align="center">
+                    <tr>
+                      <th>Código</th>
+                      <th>Nombre</th>
+                      <th>Costo unitario</th>
+                      <th>Sub Total</th>
+                      <th>Imagen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let det of pedido.detalleProductos" class="text-center w-100">
+                      <th scope="row">{{det.producto.id}}</th>
+                      <td>{{det.producto.nombre}}</td>
+                      <td>{{det.producto.costoUnitario | currency:'Q'}}</td>
+                      <td>{{det.total | currency:'Q'}}</td>
+                      <td><img src="{{det.producto.imagen}}" style="height: 100px; width: 100px"/></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </nb-accordion-item-body>
+              </nb-accordion-item>
+            </nb-accordion>
+          </nb-card-body>
+        </nb-card>
       </nb-card-body>
     </nb-card>
-  </nb-card-body>
-</nb-card>
+  </nb-layout-column>
+</nb-layout>

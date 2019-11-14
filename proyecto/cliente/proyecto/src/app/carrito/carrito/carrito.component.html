@@ -1,85 +1,89 @@
-<nb-card>
-  <nb-card-header class="text-center">
-    <h1>Pedido</h1>
-  </nb-card-header>
-  <nb-card-body>
-    <div class="form-group">
-      <form [formGroup]="formulario" (ngSubmit)="guardarPedido()">
-        <div class="row">
-          <div class="col-3">
+<nb-layout>
+  <nb-layout-column>
+    <nb-card>
+      <nb-card-header class="text-center">
+        <h1>Pedido</h1>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="form-group">
+          <form [formGroup]="formulario" (ngSubmit)="guardarPedido()">
             <div class="row">
-              <div class="col">
-                <label for="nombre"><b>Nombre:</b></label>
-                <input type="text" nbInput id="nombre" formControlName="nombre" status="info">
+              <div class="col-3">
+                <div class="row">
+                  <div class="col">
+                    <label for="nombre"><b>Nombre:</b></label>
+                    <input type="text" nbInput id="nombre" formControlName="nombre" status="info">
+                  </div>
+                  <div class="col">
+                    <label for="fechaEntrega"><b>Fecha de Entrega:</b></label>
+                    <input nbInput fullWidth formControlName="fechaEntrega" status="info" class="form-control"
+                           placeholder="fechaEntrega" id="fechaEntrega" type="date">
+                  </div>
+                  <div class="col">
+                    <label for="total"><b>Total</b></label>
+                    <input type="number" nbInput id="total" formControlName="total" status="info">
+                  </div>
+                </div>
               </div>
-              <div class="col">
-                <label for="fechaEntrega"><b>Fecha de Entrega:</b></label>
-                <input nbInput fullWidth formControlName="fechaEntrega" status="info" class="form-control"
-                       placeholder="Entrega" [nbDatepicker]="fechaEntrega" id="fechaEntrega">
-                <nb-datepicker #fechaEntrega format="dd-MM-yyyy"></nb-datepicker>
+              <div class="col-5">
+                <nb-card size="tiny">
+                  <nb-list>
+                    <nb-list-item *ngFor="let det of detalleProductos; let i = index">
+                      <div class="row">
+                        <div class="col-6">
+                          <nb-user [name]="det.producto.nombre" [title]="det.producto.costoUnitario | currency:'Q'"
+                                   [picture]="det.producto.imagen">
+                          </nb-user>
+                        </div>
+                        <div class="col-3">
+                          <input type="number" nbInput status="info" fullWidth
+                                 [(ngModel)]="detalleProductos[i].cantidad"
+                                 [ngModelOptions]="{standalone: true}" (ngModelChange)="calcularTotal()">
+                        </div>
+                        <div class="col-3">
+                          <button nbButton status="danger" (click)="eliminarProducto(i)" size="tiny">-</button>
+                        </div>
+                      </div>
+                    </nb-list-item>
+                  </nb-list>
+                </nb-card>
               </div>
-              <div class="col">
-                <label for="total"><b>Total</b></label>
-                <input type="number" nbInput id="total" formControlName="total" status="info">
+              <div class="col-3">
+                <button nbButton status="success" type="submit">Guardar</button>
               </div>
             </div>
-          </div>
-          <div class="col-5">
-            <nb-card size="tiny">
-              <nb-list>
-                <nb-list-item *ngFor="let det of detalleProductos; let i = index">
-                  <div class="row">
-                    <div class="col-6">
-                      <nb-user [name]="det.producto.nombre" [title]="det.producto.costoUnitario | currency:'Q'"
-                               [picture]="det.producto.imagen">
-                      </nb-user>
-                    </div>
-                    <div class="col-3">
-                      <input type="number" nbInput status="info" fullWidth [(ngModel)]="detalleProductos[i].cantidad"
-                             [ngModelOptions]="{standalone: true}" (ngModelChange)="calcularTotal()">
-                    </div>
-                    <div class="col-3">
-                      <button nbButton status="danger" (click)="eliminarProducto(i)" size="tiny">-</button>
-                    </div>
-                  </div>
-                </nb-list-item>
-              </nb-list>
-            </nb-card>
-          </div>
-          <div class="col-3">
-            <button nbButton status="success" type="submit">Guardar</button>
+          </form>
+          <br>
+          <div class="row">
+            <div class="col">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Costo Unitario</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let det of productos">
+                  <td>{{det.id}}</td>
+                  <td>{{det.nombre}}</td>
+                  <td>{{det.costoUnitario | currency:'Q'}}</td>
+                  <td><img src="{{det.imagen}}" style="height: 50px; width: 50px"/></td>
+                  <td>
+                    <button nbButton status="success" (click)="agregarProducto(det)" size="tiny">
+                      +
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </form>
-      <br>
-      <div class="row">
-        <div class="col">
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th scope="col">Codigo</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Costo Unitario</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let det of productos">
-              <td>{{det.id}}</td>
-              <td>{{det.nombre}}</td>
-              <td>{{det.costoUnitario | currency:'Q'}}</td>
-              <td><img src="{{det.imagen}}" style="height: 50px; width: 50px"/></td>
-              <td>
-                <button nbButton status="success" (click)="agregarProducto(det)" size="tiny">
-                  +
-                </button>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </nb-card-body>
-</nb-card>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>

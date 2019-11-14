@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {CrudService} from '../../share/crud.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NotificacionesService} from '../../share/notificaciones.service';
 
 @Component({
   selector: 'app-productos-l',
@@ -12,7 +13,8 @@ export class ProductosLComponent implements OnInit {
 
   constructor(
     private crudService: CrudService,
-    private router: Router
+    private router: Router,
+    private notificaciones: NotificacionesService
   ) {
     this.crudService.setRecuros('productos');
     this.cargarProductos();
@@ -25,9 +27,9 @@ export class ProductosLComponent implements OnInit {
     try {
       const productos = await this.crudService.obtenerTodos().toPromise();
       this.listaProductos = productos;
-
+      this.notificaciones.emitir('success', 'Datos cargados.');
     }catch (e) {
-      console.log(e.error.message);
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
     }
   }
 
@@ -39,9 +41,9 @@ export class ProductosLComponent implements OnInit {
     try {
       await this.crudService.eliminar(id).toPromise();
       this.cargarProductos();
-
+      this.notificaciones.emitir('success', 'Registro Eliminado.');
     }catch (e) {
-      console.log(e.error.message);
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
     }
   }
 

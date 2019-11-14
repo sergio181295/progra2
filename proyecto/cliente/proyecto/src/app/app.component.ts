@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
           {
             title: 'Mi Perfil',
             icon: 'person-outline',
-            link: [],
+            link: ['perfil'],
           },
           {
             title: 'Inicio*',
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit{
           {
             title: 'Mi Perfil',
             icon: 'person-outline',
-            link: [],
+            link: ['perfil'],
           },
           {
             title: 'Inicio',
@@ -90,7 +90,7 @@ export class AppComponent implements OnInit{
           {
             title: 'Mi Perfil',
             icon: 'person-outline',
-            link: [],
+            link: ['perfil'],
           },
           {
             title: 'Inicio',

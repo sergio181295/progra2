@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CrudService} from '../../share/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NotificacionesService} from '../../share/notificaciones.service';
 
 @Component({
   selector: 'app-anuncios-v',
@@ -17,7 +18,8 @@ export class AnunciosVComponent implements OnInit {
     private formBuilder: FormBuilder,
     private crudService: CrudService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private notificaciones: NotificacionesService
   ) {
     crudService.setRecuros('anuncios');
     this.id = +this.activatedRoute.snapshot.paramMap.get('id');
@@ -39,14 +41,12 @@ export class AnunciosVComponent implements OnInit {
     })
   }
 
-  guardarAnuncio(){
+  async guardarAnuncio(){
     try {
-      console.log(this.formulario.value);
-      this.crudService.guardar(this.formulario.value).subscribe(res => {
-        this.router.navigate(['anuncios']);
-      })
+      await this.crudService.guardar(this.formulario.value).toPromise();
+      this.router.navigate(['anuncios']);
     }catch (e) {
-      window.alert(e);
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
     }
   }
 
@@ -54,6 +54,7 @@ export class AnunciosVComponent implements OnInit {
     this.crudService.obtenerUno(id).subscribe(anuncio => {
       this.formulario.patchValue(anuncio);
       this.imagen = anuncio.imagen
+      this.notificaciones.emitir('success', 'Datos cargados.');
     })
   }
 

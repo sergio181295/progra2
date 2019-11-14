@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CrudService} from '../../share/crud.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NotificacionesService} from '../../share/notificaciones.service';
 
 @Component({
   selector: 'app-usuarios-l',
@@ -13,11 +14,11 @@ export class UsuariosLComponent implements OnInit {
 
   constructor(
     private crudService: CrudService,
-    private router: Router
+    private router: Router,
+    private notificaciones: NotificacionesService
   ) {
     this.crudService.setRecuros('usuarios');
     this.cargarusuarios();
-
   }
 
   ngOnInit() {
@@ -26,17 +27,22 @@ export class UsuariosLComponent implements OnInit {
   cargarusuarios() {
     this.crudService.obtenerTodos().subscribe(usuarios => {
       this.listaUsuarios = usuarios;
-    })
+      this.notificaciones.emitir('success', 'Datos cargados.');
+    });
   }
 
   nuevoUsuario() {
     this.router.navigate(['usuarios/nuevo']);
   }
 
-  eliminarUsuario(id: number) {
-    this.crudService.eliminar(id).subscribe(res => {
+  async eliminarUsuario(id: number) {
+    try {
+      await this.crudService.eliminar(id).toPromise();
       this.cargarusuarios();
-    })
+      this.notificaciones.emitir('success', 'Registro Eliminado.');
+    } catch (e) {
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
+    }
   }
 
   editarUsuario(id: number) {

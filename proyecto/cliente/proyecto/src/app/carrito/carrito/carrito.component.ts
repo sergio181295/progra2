@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CrudService} from '../../share/crud.service';
 import {Router} from '@angular/router';
+import {NotificacionesService} from '../../share/notificaciones.service';
 
 @Component({
   selector: 'app-carrito',
@@ -15,7 +16,8 @@ export class CarritoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private crudService: CrudService,
-    private router: Router
+    private router: Router,
+    private notificaciones: NotificacionesService
   ) {
     this.armarFormulario();
   }
@@ -38,8 +40,9 @@ export class CarritoComponent implements OnInit {
     try {
       this.crudService.setRecuros('productos');
       this.productos = await this.crudService.obtenerTodos().toPromise();
+      this.notificaciones.emitir('success', 'Datos cargados.');
     }catch (e) {
-      console.log(e.error? e.error.messsage : e);
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
     }
   }
 
@@ -52,11 +55,17 @@ export class CarritoComponent implements OnInit {
         }
       }
       this.formulario.patchValue({detalleProductos: detallePedido});
+
+      //fecha
+      let fecha = new Date(this.formulario.value.fechaEntrega);
+      fecha.setDate(fecha.getDate() + 1);
+      this.formulario.patchValue({fechaEntrega: fecha});
+
       this.crudService.setRecuros('pedidos/'+localStorage.getItem('usuarioId'));
       await this.crudService.guardar(this.formulario.value).toPromise();
       this.router.navigate(['pedidos']);
     } catch (e) {
-      console.log(e.error? e.error.messsage : e);
+      this.notificaciones.emitir('danger', e.error ? e.error.message : e);
     }
   }
 

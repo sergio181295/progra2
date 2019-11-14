@@ -44,15 +44,15 @@ public class UsuarioRsc {
 	@PutMapping
 	public Usuario guardar(@RequestBody Usuario usuario) throws Exception {
 		String error = "";
-		error += Utilidades.validarCampo(usuario.getPassword(), "contraseña");
-		error += Utilidades.validarCampo(usuario.getCorreo(), "correo");
-		error += Utilidades.validarCampo(usuario.getApellido(), "apellido");
-		error += Utilidades.validarCampo(usuario.getNombre(), "nombre");
-		error += Utilidades.validarCampo(usuario.getFechaNacimiento(), "fecha de nacimiento");
-		error += Utilidades.validarCampo(usuario.getDireccionEntrega(), "direccion de entrega");
+		error += Utilidades.validarCampo(usuario.getPassword(), "Contraseña");
+		error += Utilidades.validarCampo(usuario.getCorreo(), "Correo");
+		error += Utilidades.validarCampo(usuario.getApellido(), "Apellido");
+		error += Utilidades.validarCampo(usuario.getNombre(), "Nombre");
+		error += Utilidades.validarCampo(usuario.getFechaNacimiento(), "Fecha de Nacimiento");
+		error += Utilidades.validarCampo(usuario.getDireccionEntrega(), "Dirección de Entrega");
 		
 		if(usuario.getTelefonos() == null || usuario.getTelefonos().isEmpty()) {
-			error += "Debe ingresar al menos 1 numero de teléfono.";
+			error += "Debe ingresar al menos 1 numero de teléfono.\n";
 		}
 		
 		if(!error.isEmpty()) {
