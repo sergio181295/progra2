@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('acceso', usuario.esAdministrador? '0' : '1');
       localStorage.setItem('reload', 's');
       localStorage.setItem('usuarioId', usuario.id);
-      this.router.navigate(['inicio']);
+      this.router.navigate(['perfil']);
     } catch (e) {
       this.notificaciones.emitir('danger', e.error ? e.error.message : e);
     }

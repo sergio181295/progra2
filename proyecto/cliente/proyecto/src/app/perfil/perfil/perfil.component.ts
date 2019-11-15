@@ -26,6 +26,10 @@ export class PerfilComponent implements OnInit {
     this.acceso = +localStorage.getItem('acceso');
     crudService.setRecuros('usuarios');
     this.aramarFormulario();
+    if(localStorage.getItem('reload') === 's'){
+      localStorage.setItem('reload', 'n');
+      window.location.reload();
+    }
   }
 
   ngOnInit() {

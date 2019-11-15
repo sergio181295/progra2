@@ -31,7 +31,8 @@ const routes: Routes = [
   {path: 'pedidos/:id', component: PedidosVComponent},
   {path: 'carrito', component: CarritoComponent},
   {path: 'perfil', component: PerfilComponent},
-  {path: '**', component: InicioComponent},
+  {path: '', component: PerfilComponent},
+  {path: '**', component: PerfilComponent},
 ];
 
 @NgModule({

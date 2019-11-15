@@ -22,11 +22,6 @@ export class AppComponent implements OnInit{
             link: ['perfil'],
           },
           {
-            title: 'Inicio*',
-            icon: 'home-outline',
-            link: ['inicio'],
-          },
-          {
             title: 'Anuncios',
             icon: 'grid-outline',
             link: 'anuncios',
@@ -40,16 +35,6 @@ export class AppComponent implements OnInit{
             title: 'Productos',
             icon: 'cube-outline',
             link: ['productos'],
-          },
-          {
-            title: 'Carrito*',
-            icon: 'shopping-cart-outline',
-            link: ['carrito'],
-          },
-          {
-            title: 'Mis Pedidos*',
-            icon: 'list-outline',
-            link: ['pedidos'],
           },
           {
             title: 'Cerrar Sesion',

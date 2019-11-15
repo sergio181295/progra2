@@ -37,6 +37,9 @@ export class UsuariosLComponent implements OnInit {
 
   async eliminarUsuario(id: number) {
     try {
+      if(id === +localStorage.getItem('usuarioId')){
+        throw 'No puede eliminar el usuario de la sesion actual.'
+      }
       await this.crudService.eliminar(id).toPromise();
       this.cargarusuarios();
       this.notificaciones.emitir('success', 'Registro Eliminado.');
