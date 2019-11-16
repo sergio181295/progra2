@@ -44,7 +44,7 @@ public class PedidoRsc {
 	public List<Pedido> obtenerTodos(@PathVariable("usuarioId") Integer usuarioId) {
 		String sql = "SELECT ID FROM PEDIDOS WHERE USUARIO_ID = " + usuarioId;
 		List<Integer> ids = entityManager.createNativeQuery(sql).getResultList();
-		List<Pedido> lista = new ArrayList<>();
+		List<Pedido> lista = new ArrayList<Pedido>();
 		if (ids != null && ids.size() > 0) {
 			for (Integer aux : ids) {
 				Pedido pedido = (Pedido) pedidoCtrl.findById(aux).get();
@@ -73,7 +73,7 @@ public class PedidoRsc {
 			det.setTotal(det.getCantidad() * det.getProducto().getCostoUnitario());
 			total += det.getTotal();
 		}
-		if (total.equals(0.0)) {
+		if (total <= 0.0) {
 			throw new Error("El pedido debe tener al menos 1 producto.");
 		}
 		pedido.setTotal(total);

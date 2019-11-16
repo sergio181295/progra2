@@ -1,5 +1,6 @@
 package proyecto.rsc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -37,8 +38,15 @@ public class UsuarioRsc {
 	
 	@GetMapping
 	public List<Usuario> obtenerTodos() {
-		List<Usuario> listaList =  (List<Usuario>) usuarioCtrl.findAll();
-		return listaList;
+		List<Usuario> lista =  (List<Usuario>) usuarioCtrl.findAll();
+		
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		for (Usuario usuario : lista) {
+			if(!usuario.getEsAdministrador()) {
+				usuarios.add(usuario);
+			}
+		}
+		return usuarios;
 	}
 	
 	@PutMapping

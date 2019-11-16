@@ -12,27 +12,30 @@ import { PedidosLComponent } from './pedidos/pedidos-l/pedidos-l.component';
 import { PedidosVComponent } from './pedidos/pedidos-v/pedidos-v.component';
 import {CarritoComponent} from './carrito/carrito/carrito.component';
 import {PerfilComponent} from './perfil/perfil/perfil.component';
+import { AdminGuard } from './share/admin.guard';
+import { VendedorGuard } from './share/vendedor.guard';
+import { UsuarioGuard } from './share/usuario.guard';
 
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'anuncios' ,component: AnunciosLComponent},
-  {path: 'anuncios/nuevo', component: AnunciosVComponent},
-  {path: 'anuncios/:id', component: AnunciosVComponent},
-  {path: 'inicio', component: InicioComponent},
-  {path: 'usuarios', component: UsuariosLComponent},
-  {path: 'usuarios/nuevo', component: UsuariosVComponent},
-  {path: 'usuarios/:id', component: UsuariosVComponent},
-  {path: 'productos', component: ProductosLComponent},
-  {path: 'productos/nuevo', component: ProductosVComponent},
-  {path: 'productos/:id', component: ProductosVComponent},
-  {path: 'pedidos', component: PedidosLComponent},
-  {path: 'pedidos/nuevo', component: PedidosVComponent},
-  {path: 'pedidos/:id', component: PedidosVComponent},
-  {path: 'carrito', component: CarritoComponent},
-  {path: 'perfil', component: PerfilComponent},
-  {path: '', component: PerfilComponent},
-  {path: '**', component: PerfilComponent},
+  {path: 'login', component: LoginComponent },
+  {path: 'anuncios' ,component: AnunciosLComponent, canActivate: [AdminGuard] },
+  {path: 'anuncios/nuevo', component: AnunciosVComponent, canActivate: [AdminGuard] },
+  {path: 'anuncios/:id', component: AnunciosVComponent, canActivate: [AdminGuard] },
+  {path: 'inicio', component: InicioComponent, canActivate: [VendedorGuard] },
+  {path: 'usuarios', component: UsuariosLComponent, canActivate: [AdminGuard] },
+  {path: 'usuarios/nuevo', component: UsuariosVComponent, canActivate: [AdminGuard] },
+  {path: 'usuarios/:id', component: UsuariosVComponent, canActivate: [AdminGuard] },
+  {path: 'productos', component: ProductosLComponent, canActivate: [AdminGuard] },
+  {path: 'productos/nuevo', component: ProductosVComponent, canActivate: [AdminGuard] },
+  {path: 'productos/:id', component: ProductosVComponent, canActivate: [AdminGuard] },
+  {path: 'pedidos', component: PedidosLComponent, canActivate: [VendedorGuard] },
+  {path: 'pedidos/nuevo', component: PedidosVComponent, canActivate: [VendedorGuard] },
+  {path: 'pedidos/:id', component: PedidosVComponent, canActivate: [VendedorGuard] },
+  {path: 'carrito', component: CarritoComponent, canActivate: [VendedorGuard] },
+  {path: 'perfil', component: PerfilComponent, canActivate: [UsuarioGuard]},
+  {path: '', component: PerfilComponent, canActivate: [UsuarioGuard]},
+  {path: '**', component: PerfilComponent, canActivate: [UsuarioGuard]},
 ];
 
 @NgModule({

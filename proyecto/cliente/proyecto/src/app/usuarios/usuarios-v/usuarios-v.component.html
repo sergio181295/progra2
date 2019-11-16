@@ -134,6 +134,7 @@
                       <th>Código</th>
                       <th>Nombre</th>
                       <th>Costo unitario</th>
+                      <th>Cantidad</th>
                       <th>Sub Total</th>
                       <th>Imagen</th>
                     </tr>
@@ -143,6 +144,7 @@
                       <th scope="row">{{det.producto.id}}</th>
                       <td>{{det.producto.nombre}}</td>
                       <td>{{det.producto.costoUnitario | currency:'Q'}}</td>
+                      <td>{{det.cantidad}}</td>
                       <td>{{det.total | currency:'Q'}}</td>
                       <td><img src="{{det.producto.imagen}}" style="height: 100px; width: 100px"/></td>
                     </tr>

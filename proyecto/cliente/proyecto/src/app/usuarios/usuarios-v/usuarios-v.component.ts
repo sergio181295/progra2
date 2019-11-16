@@ -52,9 +52,6 @@ export class UsuariosVComponent implements OnInit {
         if (pass.search(/[A-Z]/) < 0) {
           error += 'La contraseña debe tener al menos una letra mayuscula.\n';
         }
-        if (pass.length >= 8) {
-          error += 'La contraseña debe tener al menos 8 digitos.\n';
-        }
 
         if (error !== '') {
           throw error;
